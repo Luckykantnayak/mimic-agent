@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mimic Agent: Learning from Human Demonstrations</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #363636;
+            --link-color: #0000EE;
+            --bg-color: #ffffff;
+            --text-color: #4a4a4a;
+            --light-gray: #f5f5f5;
+        }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: #fdfdfd;
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            font-size: 1.1rem;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--primary-color);
+            font-weight: 800;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--link-color);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            padding-bottom: 2rem;
+        }
+
+        .authors {
+            margin-bottom: 0.5em;
+            font-size: 1.1rem;
+        }
+
+        .author {
+            display: inline-block;
+            margin: 0 0.5em;
+        }
+
+        .author a {
+            font-size: 1.1rem;
+            text-decoration: none;
+            color: var(--link-color);
+            font-weight: bold;
+        }
+
+        .author a:hover {
+            text-decoration: underline;
+        }
+
+        .affiliation {
+            font-size: 1.1rem;
+            color: #555555;
+            margin-bottom: .5rem;
+        }
+
+        /* Button Links */
+        .link-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            font-family: "Helvetica", "Arial", sans-serif;
+        }
+
+        .btn {
+            background-color: #363636;
+            color: #fff !important;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.1s ease, background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #4a4a4a;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .btn i {
+            margin-right: 8px;
+            font-size: 1.1em;
+        }
+
+        /* Abstract & Text */
+        .abstract-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: justify;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        /* Figures */
+        .figure-container {
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .figure-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Video Grids */
+        .grid-container {
+            display: grid;
+            gap: 1.5rem;
+            margin: 1.5rem auto;
+        }
+
+        /* 5x4 Grid for Baseline Comparisons (5 skills) */
+        .baseline-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        /* 2-column grid for Skills */
+        .skills-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* 2x2 Grid for Keyframing Comparison */
+        .comparison-grid {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .grid-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .grid-item video {
+            width: 100%;
+            display: block;
+            background: #000;
+        }
+
+        .grid-item p {
+            padding: 12px;
+            margin: 0;
+            font-size: 0.9rem;
+            text-align: center;
+            background-color: #f9f9f9;
+            color: #555;
+            font-weight: 500;
+            border-top: 1px solid #eee;
+            font-family: "Helvetica", "Arial", sans-serif;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Column Headers */
+        .grid-header {
+            font-family: "Helvetica", "Arial", sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary-color);
+            text-align: center;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        /* Row Labels */
+        .row-label {
+            font-family: "Helvetica", "Arial", sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 3rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .baseline-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .baseline-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header-section">
+            <h1>Mimic Agent: Learning from Human Demonstrations</h1>
+
+            <div class="authors">
+                <div class="author"><a href="#" target="_blank">Author One</a></div>
+                <div class="author"><a href="#" target="_blank">Author Two</a></div>
+                <div class="author"><a href="#" target="_blank">Author Three</a></div>
+            </div>
+
+            <div class="affiliation">
+                Research Institution
+            </div>
+
+            <div class="link-buttons">
+                <a href="#" target="_blank" class="btn">
+                    <i class="fas fa-file-pdf"></i> Paper
+                </a>
+                <a href="#" target="_blank" class="btn">
+                    <i class="fab fa-github"></i> Code
+                </a>
+                <a href="#" target="_blank" class="btn">
+                    <i class="fas fa-database"></i> Dataset
+                </a>
+            </div>
+        </div>
+
+        <div class="abstract-container">
+            <h2>Abstract</h2>
+            <p>
+                We present MimicAgent, a text-to-trajectory
+generation framework for learning dynamic
+quadruped skills. Although reward shaping is
+extensively used when training quadruped poli-
+cies, navigating the resulting reward landscape
+is notoriously difficult, requiring hours of ”grad-
+uate student descent”. Eureka attempts to au-
+tomate reward design with LLMs, but we find
+that it struggles to generalize across diverse skills
+and morphologies. Motivated by the success of
+example-guided RL for humanoids, we revisit
+skill learning from demonstrations for quadrupeds.
+Unlike humanoids, which can exploit large-scale
+motion capture datasets for learning, quadrupeds
+lack such reference motion data. We make the
+observation that manually keyframing quadruped
+reference motions can be more intuitive than re-
+ward shaping; in particular, we find that rather
+coarse and even dynamically-infeasible motions
+can still be effective reference targets for example-
+guided RL. However, manual keyframing is still
+too cumbersome to scale for learning large skill
+libraries. To address this challenge, we propose
+an LLM-based pipeline that generates kinemati-
+cally feasible quadruped trajectories for diverse
+skills. Although these trajectories are not dynami-
+cally feasible, we show that they are sufficient to
+train successful policies with DeepMimic. Across
+all evaluated skills, human raters consistently pre-
+fer policies generated by MimicAgent over those
+produced by Eureka.
+            </p>
+           
+        </div>
+
+        <hr>
+
+        <h2>Baseline Comparisons</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 2rem;">
+            We compare Mimic Agent against two state-of-the-art baselines across five different skills: 
+            Walking, Bounding, Side Flip, Front Flip, and Aerial Cross. Each video demonstrates the performance 
+            of different methods on the same skill.
+        </p>
+
+        <!-- Grid Headers -->
+        <div class="grid-container baseline-grid" style="margin-bottom: 0.5rem;">
+            <div class="grid-header">Skill</div>
+            <div class="grid-header">Eureka</div>
+            <div class="grid-header">KeyFraming</div>
+            <div class="grid-header">Mimic Agent (Ours)</div>
+        </div>
+
+        <!-- Baseline Comparison Grid -->
+        <div class="grid-container baseline-grid">
+            <!-- Row 1: Walking -->
+            <div class="row-label">Walking</div>
+            <div class="grid-item">
+                <video src="videos/baseline1_walking.mp4" controls loop muted playsinline></video>
+                <p>Baseline Method 1</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/baseline2_walking.mp4" controls loop muted playsinline></video>
+                <p>Baseline Method 2</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/mimicagent_walking.mp4" controls loop muted playsinline></video>
+                <p>Mimic Agent</p>
+            </div>
+
+            <!-- Row 2: Bounding -->
+            <div class="row-label">Bounding</div>
+            <div class="grid-item">
+                <video src="videos/baseline1_bounding.mp4" controls loop muted playsinline></video>
+                <p>Baseline Method 1</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/baseline2_bounding.mp4" controls loop muted playsinline></video>
+                <p>Baseline Method 2</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/mimicagent_bounding.mp4" controls loop muted playsinline></video>
+                <p>Mimic Agent</p>
+            </div>
+
+            <!-- Row 3: Side Flip -->
+            <div class="row-label">Side Flip</div>
+            <div class="grid-item">
+                <video src="videos/baseline1_sideflip.mp4" controls loop muted playsinline></video>
+                <p>Baseline Method 1</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/baseline2_sideflip.mp4" controls loop muted playsinline></video>
+                <p>Baseline Method 2</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/mimicagent_sideflip.mp4" controls loop muted playsinline></video>
+                <p>Mimic Agent</p>
+            </div>
+
+            <!-- Row 4: Front Flip -->
+            <div class="row-label">Front Flip</div>
+            <div class="grid-item">
+                <video src="videos/baseline1_frontflip.mp4" controls loop muted playsinline></video>
+                <p>Baseline Method 1</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/baseline2_frontflip.mp4" controls loop muted playsinline></video>
+                <p>Baseline Method 2</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/mimicagent_frontflip.mp4" controls loop muted playsinline></video>
+                <p>Mimic Agent</p>
+            </div>
+
+            <!-- Row 5: Aerial Cross -->
+            <div class="row-label">Aerial Cross</div>
+            <div class="grid-item">
+                <video src="videos/baseline1_aerialcross.mp4" controls loop muted playsinline></video>
+                <p>Baseline Method 1</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/baseline2_aerialcross.mp4" controls loop muted playsinline></video>
+                <p>Baseline Method 2</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/mimicagent_aerialcross.mp4" controls loop muted playsinline></video>
+                <p>Mimic Agent</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Diverse Skills Demonstration</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 2rem;">
+            Mimic Agent successfully learns and executes 10 diverse manipulation skills proposed by human demonstrators. 
+            Each skill showcases different aspects of dexterous manipulation and task understanding.
+        </p>
+
+        <!-- Skills Grid -->
+        <div class="grid-container skills-grid">
+            <div class="grid-item">
+                <video src="videos/skill_01_pouring.mp4" controls loop muted playsinline></video>
+                <p>Skill 1: Precision Pouring</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/skill_02_stacking.mp4" controls loop muted playsinline></video>
+                <p>Skill 2: Block Stacking</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/skill_03_insertion.mp4" controls loop muted playsinline></video>
+                <p>Skill 3: Peg Insertion</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/skill_04_folding.mp4" controls loop muted playsinline></video>
+                <p>Skill 4: Cloth Folding</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/skill_05_opening.mp4" controls loop muted playsinline></video>
+                <p>Skill 5: Door Opening</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/skill_06_threading.mp4" controls loop muted playsinline></video>
+                <p>Skill 6: Needle Threading</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/skill_07_sorting.mp4" controls loop muted playsinline></video>
+                <p>Skill 7: Object Sorting</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/skill_08_wiping.mp4" controls loop muted playsinline></video>
+                <p>Skill 8: Surface Wiping</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/skill_09_screwing.mp4" controls loop muted playsinline></video>
+                <p>Skill 9: Screw Fastening</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/skill_10_flipping.mp4" controls loop muted playsinline></video>
+                <p>Skill 10: Object Flipping</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Keyframing vs. Mimic Agent</h2>
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 2rem;">
+            We compare our Mimic Agent approach with traditional keyframing methods. The videos demonstrate 
+            that Mimic Agent produces smoother, more natural motions while achieving higher task success rates.
+        </p>
+
+        <!-- Comparison Grid -->
+        <div class="grid-container comparison-grid">
+            <div class="grid-item">
+                <video src="videos/keyframe_task1.mp4" controls loop muted playsinline></video>
+                <p>Keyframing: Task 1</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/mimicagent_task1.mp4" controls loop muted playsinline></video>
+                <p>Mimic Agent: Task 1</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/keyframe_task2.mp4" controls loop muted playsinline></video>
+                <p>Keyframing: Task 2</p>
+            </div>
+            <div class="grid-item">
+                <video src="videos/mimicagent_task2.mp4" controls loop muted playsinline></video>
+                <p>Mimic Agent: Task 2</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>Citation</h2>
+        <p>If you find our work useful, please cite:</p>
+        <div style="background-color: #f5f5f5; border-radius: 8px; padding: 1.5rem; margin: 1rem auto; max-width: 900px; font-family: 'Courier New', monospace; font-size: 0.9rem; overflow-x: auto;">
+            <pre><code>@article{author2025mimicagent,
+  title={Mimic Agent: Learning from Human Demonstrations},
+  author={Author, First and Author, Second and Author, Third},
+  journal={Conference/Journal Name},
+  year={2025}
+}</code></pre>
+        </div>
+
+    </div>
+</body>
+
+</html>
