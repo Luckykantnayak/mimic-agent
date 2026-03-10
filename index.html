@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MimicAgent: Learning Quadruped Skills via Text-to-Trajectory Generation</title>
+    <title>MimicAgent: Learning from Human Demonstrations</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -451,10 +451,10 @@
         <img src="eureka_gifs/go2_trot_eureka.gif" loop muted playsinline />
     </div>
     <div class="grid-item">
-        <img src="BASELINE_KEYFRAME/KEYFRAME_TROT.gif" loop muted playsinline />
+        <img src="BASELINE_KEYFRAME/go2_walking_mimickit0000-0299.gif" loop muted playsinline />
     </div>
     <div class="grid-item">
-        <img src="BASELINE_MIMIC/SKILL_TROT_WALK.gif" loop muted playsinline />
+        <img src="BASELINE_MIMIC/SKILL_TROT_WALK_Go20000-0299.gif" loop muted playsinline />
     </div>
 
     <!-- Bounding -->
@@ -468,10 +468,10 @@
         <img src="eureka_gifs/go2_bounding_eureka.gif" loop muted playsinline />
     </div>
     <div class="grid-item">
-        <img src="BASELINE_KEYFRAME/KEYFRAME_BOUNDING.gif" loop muted playsinline />
+        <img src="BASELINE_KEYFRAME/go2_bounding_mimickit0000-0299.gif" loop muted playsinline />
     </div>
     <div class="grid-item">
-        <img src="BASELINE_MIMIC/SKILL_BOUND_WALK.gif" loop muted playsinline />
+        <img src="BASELINE_MIMIC/SKILL_BOUND_WALK_Go20000-0299.gif" loop muted playsinline />
     </div>
 
     <!-- Side Flip -->
@@ -485,10 +485,10 @@
         <img src="eureka_gifs/go2w_sideflip_eureka.gif" loop muted playsinline />
     </div>
     <div class="grid-item">
-        <img src="BASELINE_KEYFRAME/KEYFRAME_SIDEFLIP.gif" loop muted playsinline />
+        <img src="BASELINE_KEYFRAME/go2w_sideflip_mimickit0000-0299.gif" loop muted playsinline />
     </div>
     <div class="grid-item">
-        <img src="BASELINE_MIMIC/SIDEFLIP.gif" loop muted playsinline />
+        <img src="BASELINE_MIMIC/SKILL_SIDEFLIP_AW0000-0037.gif" loop muted playsinline />
     </div>
 
     <!-- Front Flip -->
@@ -502,10 +502,10 @@
         <img src="eureka_gifs/go2w_frontflip_eureka.gif" loop muted playsinline />
     </div>
     <div class="grid-item">
-        <img src="BASELINE_KEYFRAME/KEYFRAME_FRONTFLIP.gif" loop muted playsinline />
+        <img src="BASELINE_KEYFRAME/go2w_frontflip_mimickit0000-0299.gif" loop muted playsinline />
     </div>
     <div class="grid-item">
-        <img src="BASELINE_MIMIC/FRONTFLIP.gif" loop muted playsinline />
+        <img src="BASELINE_MIMIC/SKILL_FRONTFLIP_AW0000-0299.gif" loop muted playsinline />
     </div>
 
     <!-- Aerial Crossover -->
@@ -519,10 +519,10 @@
         <img src="eureka_gifs/go2w_aerialcrossover_eureka.gif" loop muted playsinline />
     </div>
     <div class="grid-item">
-        <img src="BASELINE_KEYFRAME/KEYFRAME_AERIALCROSSOVER.gif" loop muted playsinline />
+        <img src="BASELINE_KEYFRAME/go2w_aerialcrossover_mimickit0000-0299.gif" loop muted playsinline />
     </div>
     <div class="grid-item">
-        <img src="BASELINE_MIMIC/SKILL_AERIAL_CROSSOVER_RECOVERY.gif" loop muted playsinline />
+        <img src="BASELINE_MIMIC/SKILL_AERIAL_CROSSOVER_RECOVERY_AW0000-0299.gif" loop muted playsinline />
     </div>
 
 </div>
@@ -542,43 +542,43 @@
         <!-- Skills Grid -->
         <div class="grid-container skills-grid">
             <div class="grid-item">
-                <img src="LLM_Skills/SKILL_ASYNC_LISSAJOUS_CRAWL.gif" controls loop muted playsinline></img>
+                <img src="LLM_Skills/SKILL_ASYNC_LISSAJOUS_CRAWL_PW0000-0299.gif" controls loop muted playsinline></img>
                 <p>Forward locomotion using fully independent leg motions, where each leg traces a distinct periodic trajectory, collectively producing smooth translation and stability</p>
             </div>
             <div class="grid-item">
-                <img src="LLM_Skills/SKILL_DIAMOND_ROTATE_STEP.gif" controls loop muted playsinline></img>
+                <img src="LLM_Skills/SKILL_DIAMOND_ROTATE_STEP_AW0000-0299.gif" controls loop muted playsinline></img>
                 <p>Legs traces a diamond-shaped pattern on the ground</p>
             </div>
             <div class="grid-item">
-                <img src="LLM_Skills/SKILL_HAMMOCK_SWING_TURN.gif" controls loop muted playsinline></img>
+                <img src="LLM_Skills/SKILL_HAMMOCK_SWING_TURN_PW0000-0299.gif" controls loop muted playsinline></img>
                 <p>Circular motion where base sways side-to-side perpendicular to travel direction like swinging hammock</p>
             </div>
             <div class="grid-item">
-                <img src="LLM_Skills/SKILL_INCHWORM_COMPRESSION.gif" controls loop muted playsinline></img>
+                <img src="LLM_Skills/SKILL_INCHWORM_COMPRESSION_PW0000-0299.gif" controls loop muted playsinline></img>
                 <p>Forward motion through alternating full-body compression and extension cycles.</p>
             </div>
             <div class="grid-item">
-                <img src="LLM_Skills/SKILL_TORNADO_SPIN_DRIFT.gif" controls loop muted playsinline></img>
+                <img src="LLM_Skills/SKILL_TORNADO_SPIN_DRIFT_AW0000-0115.gif" controls loop muted playsinline></img>
                 <p>Rapid in-place yaw spinning with expanding and contracting limb radius creating tornado-like appearance.</p>
             </div>
             <div class="grid-item">
-                <img src="LLM_Skills/SKILL_METRONOME_SWAY_ADVANCE.gif" controls loop muted playsinline></img>
+                <img src="LLM_Skills/SKILL_METRONOME_SWAY_ADVANCE_AW0000-0299.gif" controls loop muted playsinline></img>
                 <p>Forward locomotion driven by large-amplitude lateral base swaying like an inverted pendulum metronome.</p>
             </div>
             <div class="grid-item">
-                <img src="LLM_Skills/SKILL_ORBITING_SATELLITES.gif" controls loop muted playsinline></img>
+                <img src="LLM_Skills/SKILL_ORBITING_SATELLITES_AW0000-0299.gif" controls loop muted playsinline></img>
                 <p>Forward locomotion where diagonal leg pairs orbit around their shared center while base translates</p>
             </div>
             <div class="grid-item">
-                <img src="LLM_Skills/SKILL_PINWHEEL_LATERAL_SPIN.gif" controls loop muted playsinline></img>
+                <img src="LLM_Skills/SKILL_PINWHEEL_LATERAL_SPIN_AW0000-0299.gif" controls loop muted playsinline></img>
                 <p>Sideways locomotion where legs rotate like pinwheel blades while base translates laterally.</p>
             </div>
             <div class="grid-item">
-                <img src="LLM_Skills/SKILL_PROPELLER_SPIN_ADVANCE.gif" controls loop muted playsinline></img>
+                <img src="LLM_Skills/SKILL_PROPELLER_SPIN_ADVANCE_AW0000-0299.gif" controls loop muted playsinline></img>
                 <p>Forward skating using propeller-like leg rotations for continuous thrus</p>
             </div>
             <div class="grid-item">
-                <img src="LLM_Skills/SKILL_REVERSE_CARTWHEEL_DRIFT.gif" controls loop muted playsinline></img>
+                <img src="LLM_Skills/SKILL_REVERSE_CARTWHEEL_DRIFT_AW0000-0299.gif" controls loop muted playsinline></img>
                 <p>Backward lateral locomotion via cartwheel-style rotations where legs trace circular arcs while drifting backward</p>
             </div>
         </div>
@@ -595,19 +595,19 @@
         <!-- Comparison Grid -->
         <div class="grid-container comparison-grid">
             <div class="grid-item">
-                <img src="2HARD_SKILLS/keyframe_crabcrawl.gif" controls loop muted playsinline></img>
+                <img src="2HARD_SKILLS/go2w_crabcrawl_mimickit0000-0299.gif" controls loop muted playsinline></img>
                 <p>Keyframing: Crab Diagonal Scuttle</p>
             </div>
             <div class="grid-item">
-                <img src="2HARD_SKILLS/SKILL_CRAB_DIAGONAL_SCUTTLE.gif" controls loop muted playsinline></img>
+                <img src="2HARD_SKILLS/SKILL_CRAB_DIAGONAL_SCUTTLE_PW0000-0299.gif" controls loop muted playsinline></img>
                 <p>MimicAgent: Crab Diagonal Scuttle</p>
             </div>
             <div class="grid-item">
-                <img src="2HARD_SKILLS/keyframe_reverb.gif" controls loop muted playsinline></img>
+                <img src="2HARD_SKILLS/go2w_reverb_mimickit0000-0299.gif" controls loop muted playsinline></img>
                 <p>Keyframing: Reverberating Yaw Pulse</p>
             </div>
             <div class="grid-item">
-                <img src="2HARD_SKILLS/SKILL_REVERBERATING_YAW_PULSE.gif" controls loop muted playsinline></img>
+                <img src="2HARD_SKILLS/SKILL_REVERBERATING_YAW_PULSE_AW0000-0299.gif" controls loop muted playsinline></img>
                 <p>MimicAgent: Reverberating Yaw Pulse</p>
             </div>
         </div>
