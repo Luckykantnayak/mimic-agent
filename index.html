@@ -7,177 +7,236 @@
     <title>MimicAgent: Learning from Human Demonstrations</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary-color: #363636;
-            --link-color: #0000EE;
-            --bg-color: #ffffff;
-            --text-color: #4a4a4a;
-            --light-gray: #f5f5f5;
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+            --accent-dark: #1d4ed8;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.05);
+            --radius: 12px;
         }
+
+        *, *::before, *::after { box-sizing: border-box; }
 
         body {
-            font-family: "Times New Roman", Times, serif;
-            background-color: #fdfdfd;
-            color: var(--text-color);
-            line-height: 1.6;
+            font-family: "Source Serif 4", Georgia, serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.7;
             margin: 0;
             padding: 0;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
 
-        h1,
-        h2,
-        h3 {
-            color: var(--primary-color);
+        /* ── Hero Header ── */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1d4ed8 100%);
+            color: #fff;
+            padding: 4rem 1.5rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-family: "Inter", sans-serif;
+            font-size: 2.6rem;
             font-weight: 800;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            color: #fff;
             line-height: 1.2;
+            margin: 0 auto 1.5rem;
+            max-width: 860px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.3);
         }
 
-        h2 {
-            font-size: 1.75rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        h3 {
-            font-size: 1.4rem;
+        .venue-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #bfdbfe;
+            font-family: "Inter", sans-serif;
+            font-size: 0.8rem;
             font-weight: 600;
-            margin-top: 1.5rem;
-        }
-
-        a {
-            color: var(--link-color);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        a:hover {
-            color: var(--link-color);
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
-        }
-
-        /* Header Section */
-        .header-section {
-            text-align: center;
-            padding-bottom: 2rem;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 1.2rem;
         }
 
         .authors {
-            margin-bottom: 0.5em;
-            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+            font-size: 1.05rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0 0.2rem;
         }
 
         .author {
             display: inline-block;
-            margin: 0 0.5em;
+            margin: 0 0.4em;
         }
 
         .author a {
-            font-size: 1.1rem;
+            color: #93c5fd;
+            font-weight: 600;
             text-decoration: none;
-            color: var(--link-color);
-            font-weight: bold;
+            transition: color 0.2s;
+            font-family: "Inter", sans-serif;
         }
 
-        .author a:hover {
-            text-decoration: underline;
-        }
+        .author a:hover { color: #bfdbfe; text-decoration: underline; }
 
         .affiliation {
-            font-size: 1.1rem;
-            color: #555555;
-            margin-bottom: .5rem;
+            font-family: "Inter", sans-serif;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-top: 0.3rem;
+            margin-bottom: 1.8rem;
         }
 
-        /* Button Links */
+        /* ── Buttons ── */
         .link-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 2rem;
-            font-family: "Helvetica", "Arial", sans-serif;
+            font-family: "Inter", sans-serif;
         }
 
         .btn {
-            background-color: #363636;
+            background: rgba(255,255,255,0.12);
             color: #fff !important;
             padding: 10px 22px;
             border-radius: 30px;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.1s ease, background-color 0.2s ease;
-        }
-
-        .btn:hover {
-            background-color: #4a4a4a;
-            transform: translateY(-2px);
+            border: 1px solid rgba(255,255,255,0.25);
+            backdrop-filter: blur(6px);
+            transition: background 0.2s ease, transform 0.15s ease;
             text-decoration: none;
         }
 
-        .btn i {
-            margin-right: 8px;
-            font-size: 1.1em;
+        .btn:hover {
+            background: rgba(255,255,255,0.22);
+            transform: translateY(-2px);
         }
 
-        /* Abstract & Text */
-        .abstract-container {
+        .btn i { margin-right: 7px; font-size: 1em; }
+
+        /* ── Page Body ── */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        h2 {
+            font-family: "Inter", sans-serif;
+            font-size: 1.65rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 820px;
+            margin: 0 auto 2rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* ── Section Wrapper ── */
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1.8rem;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: "";
+            flex: 1;
+            max-width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent));
+            opacity: 0.4;
+        }
+
+        .section-label::after {
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        /* ── Skating Hero GIFs ── */
+        .skating-intro {
+            text-align: center;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 1rem;
+            font-size: 0.98rem;
+        }
+
+        /* ── Abstract ── */
+        .abstract-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--accent);
+            box-shadow: var(--shadow-md);
+            padding: 2rem 2.5rem;
             max-width: 900px;
             margin: 0 auto;
+        }
+
+        .abstract-card p {
+            margin: 0;
+            color: var(--text-primary);
+            line-height: 1.8;
             text-align: justify;
         }
 
-        p {
-            margin-bottom: 1.2em;
-        }
-
-        /* Figures */
-        .figure-container {
-            margin: 2rem auto;
-            text-align: center;
-        }
-
-        .figure-container img {
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        /* Video Grids */
+        /* ── Cards / Grid Items ── */
         .grid-container {
             display: grid;
-            gap: 1.5rem;
-            margin: 1.5rem auto;
+            gap: 1.2rem;
+            margin: 0 auto;
         }
 
-        /* 5x4 Grid for Baseline Comparisons (5 skills) */
-        .baseline-grid {
-            grid-template-columns: repeat(4, 1fr);
-        }
+        .skills-grid { grid-template-columns: repeat(2, 1fr); }
 
-        /* 2-column grid for Skills */
-        .skills-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        /* 2x2 Grid for Keyframing Comparison */
         .comparison-grid {
             grid-template-columns: repeat(2, 1fr);
             max-width: 900px;
@@ -186,443 +245,411 @@
         }
 
         .grid-item {
-            background: white;
-            border-radius: 10px;
+            background: var(--surface);
+            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            box-shadow: var(--shadow-md);
             display: flex;
             flex-direction: column;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid var(--border);
         }
 
         .grid-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .grid-item video {
+        .grid-item img, .grid-item video {
             width: 100%;
             display: block;
             background: #000;
         }
 
-        .grid-item p {
-            padding: 12px;
+        .grid-item img {
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .grid-item > p {
+            padding: 10px 14px;
             margin: 0;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-align: center;
-            background-color: #f9f9f9;
-            color: #555;
+            background: #f8fafc;
+            color: var(--text-secondary);
+            font-family: "Inter", sans-serif;
             font-weight: 500;
-            border-top: 1px solid #eee;
-            font-family: "Helvetica", "Arial", sans-serif;
-            min-height: 50px;
+            border-top: 1px solid var(--border);
+            min-height: 46px;
             display: flex;
             align-items: center;
             justify-content: center;
+            line-height: 1.45;
         }
 
-        /* Column Headers */
-        .grid-header {
-            font-family: "Helvetica", "Arial", sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--primary-color);
-            text-align: center;
-            padding: 10px;
-            background-color: #f4f4f4;
-            border-radius: 8px;
-            margin-bottom: 5px;
-        }
-
-        /* Row Labels */
-        .row-label {
-            font-family: "Helvetica", "Arial", sans-serif;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            padding: 10px;
-            text-align: center;
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid #e0e0e0;
-            margin: 3rem 0;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .baseline-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            .baseline-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .comparison-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 1rem;
-            }
-        }
-        /* Grid alignment */
+        /* ── Baseline Grid ── */
         .baseline-grid {
             display: grid;
-            grid-template-columns: 320px 1fr 1fr 1fr;
-            gap: 22px 18px;
-            align-items: center;
-            margin-top: 30px;
+            grid-template-columns: 280px 1fr 1fr 1fr;
+            gap: 16px 14px;
+            align-items: start;
+            margin-top: 1rem;
         }
 
-        /* Row label container */
-        .row-label {
-            padding-right: 14px;
-        }
-
-        /* Skill title */
-        .skill-title {
-            font-size: 20px;
+        .grid-header {
+            font-family: "Inter", sans-serif;
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 6px;
-            letter-spacing: 0.3px;
+            font-size: 0.82rem;
+            color: var(--accent);
+            text-align: center;
+            padding: 10px 8px;
+            background: var(--accent-light);
+            border-radius: 8px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        .grid-header:first-child {
+            background: var(--text-primary);
+            color: #fff;
+        }
+
+        /* Skill label card */
+        .skill-label {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-self: stretch;
+        }
+
+        .skill-name {
+            font-family: "Inter", sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: block;
         }
 
         .skill-desc {
             display: block;
-            font-size: 0.9rem;
-            line-height: 1.35;
-            color: #6b7a90;   /* muted blue-gray */
-            opacity: 0.9;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
         }
 
-
-        /* GIF containers */
-        .grid-item img {
-            width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-            transition: transform 0.2s ease;
+        /* ── Citation ── */
+        .citation-block {
+            background: #0f172a;
+            border-radius: var(--radius);
+            padding: 1.6rem 2rem;
+            margin: 1rem auto;
+            max-width: 900px;
+            overflow-x: auto;
+            box-shadow: var(--shadow-md);
         }
 
-        /* Subtle hover */
-        .grid-item img:hover {
-            transform: scale(1.02);
+        .citation-block pre {
+            margin: 0;
+            font-family: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: #e2e8f0;
+            white-space: pre;
         }
 
+        .citation-block .key   { color: #93c5fd; }
+        .citation-block .value { color: #86efac; }
+        .citation-block .brace { color: #fbbf24; }
+
+        /* ── Divider ── */
+        hr {
+            border: none;
+            height: 1px;
+            background: var(--border);
+            margin: 3.5rem 0;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 960px) {
+            .baseline-grid {
+                grid-template-columns: 220px 1fr 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1  { font-size: 1.9rem; }
+            h2        { font-size: 1.4rem; }
+
+            .baseline-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .skills-grid      { grid-template-columns: 1fr; }
+            .comparison-grid  { grid-template-columns: 1fr; }
+            .container        { padding: 2rem 1rem; }
+            .abstract-card    { padding: 1.4rem 1.2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .baseline-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- ── Hero ── -->
+    <div class="hero">
+        <!-- <div class="venue-badge">Research Paper · 2026</div> -->
+        <h1>MimicAgent: Learning Quadruped Skills via Text-to-Trajectory Generation</h1>
+
+        <div class="authors">
+            <div class="author"><a href="#" target="_blank">Narayanan Palghat Parameswaran*</a></div>
+            <div class="author"><a href="#" target="_blank">Lucky Kant Nayak*</a></div>
+            <div class="author"><a href="#" target="_blank">Neehar Peri</a></div>
+            <div class="author"><a href="#" target="_blank">Deva Ramanan</a></div>
+        </div>
+
+        <div class="affiliation">Carnegie Mellon University</div>
+
+        <div class="link-buttons">
+            <a href="#" target="_blank" class="btn">
+                <i class="fas fa-file-pdf"></i> Paper
+            </a>
+            <a href="#" target="_blank" class="btn">
+                <i class="fab fa-github"></i> Code
+            </a>
+            <a href="#" target="_blank" class="btn">
+                <i class="fas fa-database"></i> Dataset
+            </a>
+        </div>
+    </div>
+
     <div class="container">
 
-        <div class="header-section">
-            <h1>MimicAgent: Learning Quadruped Skills via Text-to-Trajectory Generation</h1>
-
-            <div class="authors">
-                <div class="author"><a href="#" target="_blank">Narayanan Palghat Parameswaran* </a></div>
-                <div class="author"><a href="#" target="_blank">Lucky Kant Nayak*</a></div>
-                <div class="author"><a href="#" target="_blank">Neehar Peri</a></div>
-                <div class="author"><a href="#" target="_blank">Deva Ramanan</a></div>
+        <!-- ── Skating Teaser ── -->
+        <div class="section">
+            <div class="grid-container skills-grid">
+                <div class="grid-item">
+                    <img src="2-HAND-SKATING/2legged_skating_side.gif" loop muted playsinline alt="Side view of skating on two legs" />
+                    <p>Side view of skating on two legs</p>
+                </div>
+                <div class="grid-item">
+                    <img src="2-HAND-SKATING/2legged_skating_back.gif" loop muted playsinline alt="Back view of skating on two legs" />
+                    <p>Back view of skating on two legs</p>
+                </div>
             </div>
+            <p class="skating-intro">We visualize never-before-seen skating skills on two legs generated by MimicAgent.</p>
+        </div>
 
-            <div class="affiliation">
-                Carnegie Mellon University
-            </div>
-
-            <div class="link-buttons">
-                <a href="#" target="_blank" class="btn">
-                    <i class="fas fa-file-pdf"></i> Paper
-                </a>
-                <a href="#" target="_blank" class="btn">
-                    <i class="fab fa-github"></i> Code
-                </a>
-                <a href="#" target="_blank" class="btn">
-                    <i class="fas fa-database"></i> Dataset
-                </a>
+        <!-- ── Abstract ── -->
+        <div class="section">
+            <div class="section-label"><h2>Abstract</h2></div>
+            <div class="abstract-card">
+                <p>
+                    We present MimicAgent, a text-to-trajectory generation framework for learning dynamic
+                    quadruped skills. Although reward shaping is extensively used when training quadruped policies,
+                    navigating the resulting reward landscape
+                    is notoriously difficult, requiring hours of "graduate student descent". Eureka attempts to automate reward design with LLMs, but we find
+                    that it struggles to generalize across diverse skills
+                    and morphologies. Motivated by the success of
+                    example-guided RL for humanoids, we revisit
+                    skill learning from demonstrations for quadrupeds.
+                    Unlike humanoids, which can exploit large-scale
+                    motion capture datasets for learning, quadrupeds
+                    lack such reference motion data. We make the
+                    observation that manually keyframing quadruped
+                    reference motions can be more intuitive than reward shaping; in particular, we find that rather
+                    coarse and even dynamically-infeasible motions
+                    can still be effective reference targets for example-
+                    guided RL. However, manual keyframing is still
+                    too cumbersome to scale for learning large skill
+                    libraries. To address this challenge, we propose
+                    an LLM-based pipeline that generates kinematically feasible quadruped trajectories for diverse
+                    skills. Although these trajectories are not dynamically feasible, we show that they are sufficient to
+                    train successful policies with DeepMimic. Across
+                    all evaluated skills, human raters consistently prefer policies generated by MimicAgent over those
+                    produced by Eureka.
+                </p>
             </div>
         </div>
 
-        <!-- <h2>Novel Skating Skills</h2>
-        <p style="text-align: center; max-width: 900px; margin: 0 auto 2rem;">
-            We visualize never-before-seen skating skills on two legs generated by MimicAgent.
-        </p> -->
+        <hr>
 
-        <!-- New 2-GIF Grid -->
-        <div class="grid-container skills-grid" >
-            <div class="grid-item">
-                <img src="2-HAND-SKATING/2legged_skating_side.gif" controls loop muted playsinline></img>
-                <p>Side view of skating on two legs</p>
-            </div>
-            <div class="grid-item">
-                <img src="2-HAND-SKATING/2legged_skating_back.gif" controls loop muted playsinline></img>
-                <p>Back view of skating on two legs</p>
-            </div>
-        </div>
-        <p style="text-align: center; max-width: 900px; margin: 0 auto 2rem;">
-            We visualize never-before-seen skating skills on two legs generated by MimicAgent.
-        </p> 
-        <div class="abstract-container">
-            <h2>Abstract</h2>
-            <p>
-                We present MimicAgent, a text-to-trajectory generation framework for learning dynamic
-                quadruped skills. Although reward shaping is extensively used when training quadruped policies,
-                navigating the resulting reward landscape
-                is notoriously difficult, requiring hours of "graduate student descent". Eureka attempts to automate reward design with LLMs, but we find
-                that it struggles to generalize across diverse skills
-                and morphologies. Motivated by the success of
-                example-guided RL for humanoids, we revisit
-                skill learning from demonstrations for quadrupeds.
-                Unlike humanoids, which can exploit large-scale
-                motion capture datasets for learning, quadrupeds
-                lack such reference motion data. We make the
-                observation that manually keyframing quadruped
-                reference motions can be more intuitive than reward shaping; in particular, we find that rather
-                coarse and even dynamically-infeasible motions
-                can still be effective reference targets for example-
-                guided RL. However, manual keyframing is still
-                too cumbersome to scale for learning large skill
-                libraries. To address this challenge, we propose
-                an LLM-based pipeline that generates kinemati-
-                cally feasible quadruped trajectories for diverse
-                skills. Although these trajectories are not dynami-
-                cally feasible, we show that they are sufficient to
-                train successful policies with DeepMimic. Across
-                all evaluated skills, human raters consistently prefer policies generated by MimicAgent over those
-                produced by Eureka.
+        <!-- ── Baseline Comparisons ── -->
+        <div class="section">
+            <div class="section-label"><h2>Baseline Comparisons</h2></div>
+            <p class="section-intro">
+                We compare MimicAgent against two state-of-the-art baselines (Eureka and Manual Keyframing) across five
+                different skills: Walking, Bounding, Side Flip, Front Flip, and Aerial Crossover. Each video demonstrates
+                the performance of different methods on the same skill.
             </p>
-            
 
-        </div>
-
-        <hr>
-
-        <h2>Baseline Comparisons</h2>
-        <p style="text-align: center; max-width: 900px; margin: 0 auto 2rem;">
-            We compare MimicAgent against two state-of-the-art baselines (Eureka and Manual Keyframing) across five 
-            different skills: Walking, Bounding, Side Flip, Front Flip, and Aerial Crossover. Each video demonstrates 
-            the performance of different methods on the same skill.
-        </p>
-
-        <!-- Grid Headers -->
-        <div class="grid-container baseline-grid" style="margin-bottom: 0.5rem;">
-            <div class="grid-header">Skill</div>
-            <div class="grid-header">Eureka</div>
-            <div class="grid-header">Keyframing</div>
-            <div class="grid-header">MimicAgent (Ours)</div>
-        </div>
-
-        <!-- Baseline Comparison Grid -->
-       <!-- Baseline Comparison Grid -->
-<div class="grid-container baseline-grid">
-
-    <!-- Walking -->
-    <div class="skill-label">
-        <span class="skill-name">Walking </span>
-        <span class="skill-desc">
-            A steady forward gait where diagonal leg pairs alternate in synchronized stance and swing phases while tracking commanded velocity.
-        </span>
-    </div>
-    <div class="grid-item">
-        <img src="eureka_gifs/eureka_go2_trot.gif" loop muted playsinline />
-    </div>
-    <div class="grid-item">
-        <img src="BASELINE_KEYFRAME/go2_walking_mimickit0000-0299.gif" loop muted playsinline />
-    </div>
-    <div class="grid-item">
-        <img src="BASELINE_MIMIC/SKILL_TROT_WALK_Go20000-0299.gif" loop muted playsinline />
-    </div>
-
-    <!-- Bounding -->
-    <div class="skill-label">
-        <span class="skill-name">Bounding</span>
-        <span class="skill-desc">
-            A dynamic gait where the front legs move together and the hind legs move together, producing powerful push-offs and brief aerial phases for fast forward motion.
-        </span>
-    </div>
-    <div class="grid-item">
-        <img src="eureka_gifs/eureka_go2_bound.gif" loop muted playsinline />
-    </div>
-    <div class="grid-item">
-        <img src="BASELINE_KEYFRAME/go2_bounding_mimickit0000-0299.gif" loop muted playsinline />
-    </div>
-    <div class="grid-item">
-        <img src="BASELINE_MIMIC/SKILL_BOUND_WALK_Go20000-0299.gif" loop muted playsinline />
-    </div>
-
-    <!-- Side Flip -->
-    <div class="skill-label">
-        <span class="skill-name">Side Flip</span>
-        <span class="skill-desc">
-            A lateral acrobatic maneuver where the robot jumps and performs a full rotation about its forward axis before landing stably.
-        </span>
-    </div>
-    <div class="grid-item">
-        <img src="eureka_gifs/eureka_go2w_sideflip.gif" loop muted playsinline />
-    </div>
-    <div class="grid-item">
-        <img src="BASELINE_KEYFRAME/go2w_sideflip_mimickit0000-0299.gif" loop muted playsinline />
-    </div>
-    <div class="grid-item">
-        <img src="BASELINE_MIMIC/SKILL_SIDEFLIP_AW0000-0037.gif" loop muted playsinline />
-    </div>
-
-    <!-- Front Flip -->
-    <div class="skill-label">
-        <span class="skill-name">Front Flip</span>
-        <span class="skill-desc">
-            A forward somersault where the robot launches upward, rotates about its lateral axis, and lands back on its feet.
-        </span>
-    </div>
-    <div class="grid-item">
-        <img src="eureka_gifs/eureka_go2w_frontflip.gif" loop muted playsinline />
-    </div>
-    <div class="grid-item">
-        <img src="BASELINE_KEYFRAME/go2w_frontflip_mimickit0000-0299.gif" loop muted playsinline />
-    </div>
-    <div class="grid-item">
-        <img src="BASELINE_MIMIC/SKILL_FRONTFLIP_AW0000-0299.gif" loop muted playsinline />
-    </div>
-
-    <!-- Aerial Crossover -->
-    <div class="skill-label">
-        <span class="skill-name">Aerial Crossover</span>
-        <span class="skill-desc">
-            A dynamic maneuver where the robot leaps into the air and crosses its legs mid-flight before reestablishing stable ground contact.
-        </span>
-    </div>
-    <div class="grid-item">
-        <img src="eureka_gifs/eureka_go2w_aerialcrossover.gif" loop muted playsinline />
-    </div>
-    <div class="grid-item">
-        <img src="BASELINE_KEYFRAME/go2w_aerialcrossover_mimickit0000-0299.gif" loop muted playsinline />
-    </div>
-    <div class="grid-item">
-        <img src="BASELINE_MIMIC/SKILL_AERIAL_CROSSOVER_RECOVERY_AW0000-0299.gif" loop muted playsinline />
-    </div>
-
-</div>
-
-<hr>
-
-
-        <hr>
-
-        <h2>Diverse Skills Demonstration</h2>
-        <p style="text-align: center; max-width: 900px; margin: 0 auto 2rem;">
-            MimicAgent successfully learns and executes 10 diverse locomotion skills from text descriptions. 
-            Each skill showcases different aspects of dynamic quadruped movement and coordination. The green robot shows the reference trajectory generated by MimicAgent, and the blue 
-            robot shows the learned policy.
-        </p>
-
-        <!-- Skills Grid -->
-        <div class="grid-container skills-grid">
-            <div class="grid-item">
-                <img src="LLM_Skills/SKILL_ASYNC_LISSAJOUS_CRAWL_PW0000-0299.gif" controls loop muted playsinline></img>
-                <p>Forward locomotion using fully independent leg motions, where each leg traces a distinct periodic trajectory, collectively producing smooth translation and stability</p>
+            <!-- Column Headers -->
+            <div class="grid-container baseline-grid" style="margin-bottom: 0.4rem;">
+                <div class="grid-header">Skill</div>
+                <div class="grid-header">Eureka</div>
+                <div class="grid-header">Keyframing</div>
+                <div class="grid-header">MimicAgent (Ours)</div>
             </div>
-            <div class="grid-item">
-                <img src="LLM_Skills/SKILL_DIAMOND_ROTATE_STEP_AW0000-0299.gif" controls loop muted playsinline></img>
-                <p>Legs traces a diamond-shaped pattern on the ground</p>
-            </div>
-            <div class="grid-item">
-                <img src="LLM_Skills/SKILL_HAMMOCK_SWING_TURN_PW0000-0299.gif" controls loop muted playsinline></img>
-                <p>Circular motion where base sways side-to-side perpendicular to travel direction like swinging hammock</p>
-            </div>
-            <div class="grid-item">
-                <img src="LLM_Skills/SKILL_INCHWORM_COMPRESSION_PW0000-0299.gif" controls loop muted playsinline></img>
-                <p>Forward motion through alternating full-body compression and extension cycles.</p>
-            </div>
-            <div class="grid-item">
-                <img src="LLM_Skills/SKILL_TORNADO_SPIN_DRIFT_AW0000-0115.gif" controls loop muted playsinline></img>
-                <p>Rapid in-place yaw spinning with expanding and contracting limb radius creating tornado-like appearance.</p>
-            </div>
-            <div class="grid-item">
-                <img src="LLM_Skills/SKILL_METRONOME_SWAY_ADVANCE_AW0000-0299.gif" controls loop muted playsinline></img>
-                <p>Forward locomotion driven by large-amplitude lateral base swaying like an inverted pendulum metronome.</p>
-            </div>
-            <div class="grid-item">
-                <img src="LLM_Skills/SKILL_ORBITING_SATELLITES_AW0000-0299.gif" controls loop muted playsinline></img>
-                <p>Forward locomotion where diagonal leg pairs orbit around their shared center while base translates</p>
-            </div>
-            <div class="grid-item">
-                <img src="LLM_Skills/SKILL_PINWHEEL_LATERAL_SPIN_AW0000-0299.gif" controls loop muted playsinline></img>
-                <p>Sideways locomotion where legs rotate like pinwheel blades while base translates laterally.</p>
-            </div>
-            <div class="grid-item">
-                <img src="LLM_Skills/SKILL_PROPELLER_SPIN_ADVANCE_AW0000-0299.gif" controls loop muted playsinline></img>
-                <p>Forward skating using propeller-like leg rotations for continuous thrus</p>
-            </div>
-            <div class="grid-item">
-                <img src="LLM_Skills/SKILL_REVERSE_CARTWHEEL_DRIFT_AW0000-0299.gif" controls loop muted playsinline></img>
-                <p>Backward lateral locomotion via cartwheel-style rotations where legs trace circular arcs while drifting backward</p>
+
+            <!-- Rows -->
+            <div class="grid-container baseline-grid">
+
+                <!-- Walking -->
+                <div class="skill-label">
+                    <span class="skill-name">Walking</span>
+                    <span class="skill-desc">A steady forward gait where diagonal leg pairs alternate in synchronized stance and swing phases while tracking commanded velocity.</span>
+                </div>
+                <div class="grid-item"><img src="eureka_gifs/eureka_go2_trot.gif" loop muted playsinline alt="Eureka walking" /></div>
+                <div class="grid-item"><img src="BASELINE_KEYFRAME/go2_walking_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing walking" /></div>
+                <div class="grid-item"><img src="BASELINE_MIMIC/SKILL_TROT_WALK_Go20000-0299.gif" loop muted playsinline alt="MimicAgent walking" /></div>
+
+                <!-- Bounding -->
+                <div class="skill-label">
+                    <span class="skill-name">Bounding</span>
+                    <span class="skill-desc">A dynamic gait where the front legs move together and the hind legs move together, producing powerful push-offs and brief aerial phases for fast forward motion.</span>
+                </div>
+                <div class="grid-item"><img src="eureka_gifs/eureka_go2_bound.gif" loop muted playsinline alt="Eureka bounding" /></div>
+                <div class="grid-item"><img src="BASELINE_KEYFRAME/go2_bounding_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing bounding" /></div>
+                <div class="grid-item"><img src="BASELINE_MIMIC/SKILL_BOUND_WALK_Go20000-0299.gif" loop muted playsinline alt="MimicAgent bounding" /></div>
+
+                <!-- Side Flip -->
+                <div class="skill-label">
+                    <span class="skill-name">Side Flip</span>
+                    <span class="skill-desc">A lateral acrobatic maneuver where the robot jumps and performs a full rotation about its forward axis before landing stably.</span>
+                </div>
+                <div class="grid-item"><img src="eureka_gifs/eureka_go2w_sideflip.gif" loop muted playsinline alt="Eureka side flip" /></div>
+                <div class="grid-item"><img src="BASELINE_KEYFRAME/go2w_sideflip_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing side flip" /></div>
+                <div class="grid-item"><img src="BASELINE_MIMIC/SKILL_SIDEFLIP_AW0000-0037.gif" loop muted playsinline alt="MimicAgent side flip" /></div>
+
+                <!-- Front Flip -->
+                <div class="skill-label">
+                    <span class="skill-name">Front Flip</span>
+                    <span class="skill-desc">A forward somersault where the robot launches upward, rotates about its lateral axis, and lands back on its feet.</span>
+                </div>
+                <div class="grid-item"><img src="eureka_gifs/eureka_go2w_frontflip.gif" loop muted playsinline alt="Eureka front flip" /></div>
+                <div class="grid-item"><img src="BASELINE_KEYFRAME/go2w_frontflip_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing front flip" /></div>
+                <div class="grid-item"><img src="BASELINE_MIMIC/SKILL_FRONTFLIP_AW0000-0299.gif" loop muted playsinline alt="MimicAgent front flip" /></div>
+
+                <!-- Aerial Crossover -->
+                <div class="skill-label">
+                    <span class="skill-name">Aerial Crossover</span>
+                    <span class="skill-desc">A dynamic maneuver where the robot leaps into the air and crosses its legs mid-flight before reestablishing stable ground contact.</span>
+                </div>
+                <div class="grid-item"><img src="eureka_gifs/eureka_go2w_aerialcrossover.gif" loop muted playsinline alt="Eureka aerial crossover" /></div>
+                <div class="grid-item"><img src="BASELINE_KEYFRAME/go2w_aerialcrossover_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing aerial crossover" /></div>
+                <div class="grid-item"><img src="BASELINE_MIMIC/SKILL_AERIAL_CROSSOVER_RECOVERY_AW0000-0299.gif" loop muted playsinline alt="MimicAgent aerial crossover" /></div>
+
             </div>
         </div>
 
         <hr>
 
-        <h2>Keyframing vs. MimicAgent</h2>
-        <p style="text-align: center; max-width: 900px; margin: 0 auto 2rem;">
-            We compare MimicAgent with manual keyframed trajectories on two challenging skills: 
-            Crab Diagonal Scuttle (i.e., a diagonal locomotion with body oriented perpendicular to travel direction) and Reverberating Yaw Pulse (i.e., in-place yaw rotation using damped oscillatory pulses that gradually settle). 
-            MimicAgent produces smoother, more natural motions compared to our baselines.
-        </p>
+        <!-- ── Diverse Skills ── -->
+        <div class="section">
+            <div class="section-label"><h2>Diverse Skills Demonstration</h2></div>
+            <p class="section-intro">
+                MimicAgent successfully learns and executes 10 diverse locomotion skills from text descriptions.
+                Each skill showcases different aspects of dynamic quadruped movement and coordination. The green robot shows the reference trajectory generated by MimicAgent, and the blue
+                robot shows the learned policy.
+            </p>
 
-        <!-- Comparison Grid -->
-        <div class="grid-container comparison-grid">
-            <div class="grid-item">
-                <img src="2HARD_SKILLS/go2w_crabcrawl_mimickit0000-0299.gif" controls loop muted playsinline></img>
-                <p>Keyframing: Crab Diagonal Scuttle</p>
-            </div>
-            <div class="grid-item">
-                <img src="2HARD_SKILLS/SKILL_CRAB_DIAGONAL_SCUTTLE_PW0000-0299.gif" controls loop muted playsinline></img>
-                <p>MimicAgent: Crab Diagonal Scuttle</p>
-            </div>
-            <div class="grid-item">
-                <img src="2HARD_SKILLS/go2w_reverb_mimickit0000-0299.gif" controls loop muted playsinline></img>
-                <p>Keyframing: Reverberating Yaw Pulse</p>
-            </div>
-            <div class="grid-item">
-                <img src="2HARD_SKILLS/SKILL_REVERBERATING_YAW_PULSE_AW0000-0299.gif" controls loop muted playsinline></img>
-                <p>MimicAgent: Reverberating Yaw Pulse</p>
+            <div class="grid-container skills-grid">
+                <div class="grid-item">
+                    <img src="LLM_Skills/SKILL_ASYNC_LISSAJOUS_CRAWL_PW0000-0299.gif" loop muted playsinline alt="Async Lissajous Crawl" />
+                    <p>Forward locomotion using fully independent leg motions, where each leg traces a distinct periodic trajectory, collectively producing smooth translation and stability</p>
+                </div>
+                <div class="grid-item">
+                    <img src="LLM_Skills/SKILL_DIAMOND_ROTATE_STEP_AW0000-0299.gif" loop muted playsinline alt="Diamond Rotate Step" />
+                    <p>Legs traces a diamond-shaped pattern on the ground</p>
+                </div>
+                <div class="grid-item">
+                    <img src="LLM_Skills/SKILL_HAMMOCK_SWING_TURN_PW0000-0299.gif" loop muted playsinline alt="Hammock Swing Turn" />
+                    <p>Circular motion where base sways side-to-side perpendicular to travel direction like swinging hammock</p>
+                </div>
+                <div class="grid-item">
+                    <img src="LLM_Skills/SKILL_INCHWORM_COMPRESSION_PW0000-0299.gif" loop muted playsinline alt="Inchworm Compression" />
+                    <p>Forward motion through alternating full-body compression and extension cycles.</p>
+                </div>
+                <div class="grid-item">
+                    <img src="LLM_Skills/SKILL_TORNADO_SPIN_DRIFT_AW0000-0115.gif" loop muted playsinline alt="Tornado Spin Drift" />
+                    <p>Rapid in-place yaw spinning with expanding and contracting limb radius creating tornado-like appearance.</p>
+                </div>
+                <div class="grid-item">
+                    <img src="LLM_Skills/SKILL_METRONOME_SWAY_ADVANCE_AW0000-0299.gif" loop muted playsinline alt="Metronome Sway Advance" />
+                    <p>Forward locomotion driven by large-amplitude lateral base swaying like an inverted pendulum metronome.</p>
+                </div>
+                <div class="grid-item">
+                    <img src="LLM_Skills/SKILL_ORBITING_SATELLITES_AW0000-0299.gif" loop muted playsinline alt="Orbiting Satellites" />
+                    <p>Forward locomotion where diagonal leg pairs orbit around their shared center while base translates</p>
+                </div>
+                <div class="grid-item">
+                    <img src="LLM_Skills/SKILL_PINWHEEL_LATERAL_SPIN_AW0000-0299.gif" loop muted playsinline alt="Pinwheel Lateral Spin" />
+                    <p>Sideways locomotion where legs rotate like pinwheel blades while base translates laterally.</p>
+                </div>
+                <div class="grid-item">
+                    <img src="LLM_Skills/SKILL_PROPELLER_SPIN_ADVANCE_AW0000-0299.gif" loop muted playsinline alt="Propeller Spin Advance" />
+                    <p>Forward skating using propeller-like leg rotations for continuous thrust</p>
+                </div>
+                <div class="grid-item">
+                    <img src="LLM_Skills/SKILL_REVERSE_CARTWHEEL_DRIFT_AW0000-0299.gif" loop muted playsinline alt="Reverse Cartwheel Drift" />
+                    <p>Backward lateral locomotion via cartwheel-style rotations where legs trace circular arcs while drifting backward</p>
+                </div>
             </div>
         </div>
-       
+
         <hr>
 
-        <h2>Citation</h2>
-        <p>If you find our work useful, please cite:</p>
-        <div style="background-color: #f5f5f5; border-radius: 8px; padding: 1.5rem; margin: 1rem auto; max-width: 900px; font-family: 'Courier New', monospace; font-size: 0.9rem; overflow-x: auto;">
-            <pre><code>@article{author2025mimicagent,
-  title={MimicAgent: Learning Quadruped Skills via Text-to Trajectory Generation},
-  author={Narayanan Palghat Parameswaran, Lucky Kant Nayak, Neehar Peri, Deva Ramanan },
-  journal={Conference/Journal Name},
-  year={2026}
-}</code></pre>
+        <!-- ── Keyframing vs MimicAgent ── -->
+        <div class="section">
+            <div class="section-label"><h2>Keyframing vs. MimicAgent</h2></div>
+            <p class="section-intro">
+                We compare MimicAgent with manual keyframed trajectories on two challenging skills:
+                Crab Diagonal Scuttle (i.e., a diagonal locomotion with body oriented perpendicular to travel direction) and Reverberating Yaw Pulse (i.e., in-place yaw rotation using damped oscillatory pulses that gradually settle).
+                MimicAgent produces smoother, more natural motions compared to our baselines.
+            </p>
+
+            <div class="grid-container comparison-grid">
+                <div class="grid-item">
+                    <img src="2HARD_SKILLS/go2w_crabcrawl_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing Crab Diagonal Scuttle" />
+                    <p>Keyframing: Crab Diagonal Scuttle</p>
+                </div>
+                <div class="grid-item">
+                    <img src="2HARD_SKILLS/SKILL_CRAB_DIAGONAL_SCUTTLE_PW0000-0299.gif" loop muted playsinline alt="MimicAgent Crab Diagonal Scuttle" />
+                    <p>MimicAgent: Crab Diagonal Scuttle</p>
+                </div>
+                <div class="grid-item">
+                    <img src="2HARD_SKILLS/go2w_reverb_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing Reverberating Yaw Pulse" />
+                    <p>Keyframing: Reverberating Yaw Pulse</p>
+                </div>
+                <div class="grid-item">
+                    <img src="2HARD_SKILLS/SKILL_REVERBERATING_YAW_PULSE_AW0000-0299.gif" loop muted playsinline alt="MimicAgent Reverberating Yaw Pulse" />
+                    <p>MimicAgent: Reverberating Yaw Pulse</p>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- ── Citation ── -->
+        <div class="section">
+            <div class="section-label"><h2>Citation</h2></div>
+            <p class="section-intro">If you find our work useful, please cite:</p>
+            <div class="citation-block">
+                <pre><code><span class="brace">@article{</span><span class="key">author2025mimicagent</span>,
+  title   = {MimicAgent: Learning Quadruped Skills via Text-to Trajectory Generation},
+  author  = {Narayanan Palghat Parameswaran, Lucky Kant Nayak, Neehar Peri, Deva Ramanan},
+  journal = {Conference/Journal Name},
+  year    = {2026}
+<span class="brace">}</span></code></pre>
+            </div>
         </div>
 
     </div>
