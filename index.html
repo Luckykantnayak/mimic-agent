@@ -50,6 +50,7 @@
 
         .ref-green { color: #2f8f3e; font-weight: 600; }
         .ref-blue  { color: #2f5fb4; font-weight: 600; }
+        .ref-pink  { color: #b43f8f; font-weight: 600; }
 
         /* ── Contents TOC (scrollspy) ── */
         .toc {
@@ -633,6 +634,13 @@
         .smpl-carousel .carousel-stage { height: 380px; }
         .smpl-carousel .carousel-card img { height: auto; aspect-ratio: 16 / 9; }
 
+        /* ── Humanoid difficult-skills carousel: 8:5 renders, shown full-frame ── */
+        .hard-carousel .carousel-stage { height: 400px; }
+        .hard-carousel .carousel-card img { height: auto; aspect-ratio: 8 / 5; }
+
+        /* ── Teacher–student figure: single centered clip, capped width ── */
+        .ts-figure { max-width: 780px; }
+
         /* ── Divider ── */
         hr {
             border: none;
@@ -720,9 +728,11 @@
             <li><a href="#abstract">Abstract</a></li>
             <li><a href="#method">Method</a></li>
             <li><a href="#baseline">Baseline Comparisons</a></li>
-            <li><a href="#diverse-skills">Diverse Skills</a></li>
-            <li><a href="#humanoid">Humanoid Trajectories</a></li>
+            <li><a href="#diverse-skills">Diverse Skills Demonstration</a></li>
+            <li><a href="#humanoid">Standard Humanoid Skills</a></li>
+            <li><a href="#humanoid-hard">Novel Humanoid Skills</a></li>
             <li><a href="#real-world">Real-World Deployment</a></li>
+            <li><a href="#teacher-student">Teacher&ndash;Student Visualization</a></li>
             <li><a href="#citation">Citation</a></li>
         </ul>
     </nav>
@@ -988,10 +998,11 @@
 
         <!-- ── Humanoid Trajectories (SMPL) ── -->
         <div class="section" id="humanoid">
-            <div class="section-label"><h2>Humanoid Trajectories</h2></div>
+            <div class="section-label"><h2>Standard Humanoid Skills</h2></div>
             <p class="section-intro">
-                MimicAgent is not limited to quadrupeds — the same text-to-trajectory pipeline generates full-body
-                humanoid motions, shown here rendered on the SMPL body model.
+                MimicAgent is not limited to quadrupeds, the same text-to-trajectory pipeline generates full-body
+                humanoid motions. Shown here on the SMPL body model are everyday motions that already appear in
+                standard motion-capture datasets; MimicAgent reproduces them directly from a text prompt.
             </p>
 
             <div class="carousel smpl-carousel" id="smplCarousel">
@@ -1017,6 +1028,61 @@
                     <article class="carousel-card">
                         <img src="smpl_mimic/SMPL_SPIN.gif" loop muted playsinline alt="SMPL humanoid spinning" />
                         <p><span class="c-title">Spin</span>A full-body turn about the vertical axis, with the arms tucked and the feet repositioning to carry the rotation around.</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Humanoid Difficult Skills ── -->
+        <div class="section" id="humanoid-hard">
+            <div class="section-label"><h2>Novel Humanoid Skills</h2></div>
+            <p class="section-intro">
+                In contrast to the everyday motions above, these are novel, difficult skills &mdash; dynamic
+                acrobatics and contact-rich interaction with objects and terrain &mdash; many of which rarely or
+                never appear in motion-capture datasets. MimicAgent synthesizes each one from a text prompt alone,
+                going beyond what standard mocap corpora contain. Each clip shows the humanoid reference motion
+                (in <span class="ref-green">green</span>) produced by MimicAgent.
+            </p>
+
+            <div class="carousel hard-carousel" id="hardCarousel">
+                <button class="carousel-btn prev" type="button" aria-label="Previous skill">&#10094;</button>
+                <button class="carousel-btn next" type="button" aria-label="Next skill">&#10095;</button>
+                <div class="carousel-stage">
+                    <article class="carousel-card">
+                        <img src="humanoid_skills/ballet_spin.gif" loop muted playsinline alt="Humanoid ballet spin" />
+                        <p><span class="c-title">Ballet Spin</span>A controlled full-body pirouette, spinning about the vertical axis on a single supporting leg while the arms extend for balance.</p>
+                    </article>
+                    <article class="carousel-card">
+                        <img src="humanoid_skills/cartwheel.gif" loop muted playsinline alt="Humanoid cartwheel" />
+                        <p><span class="c-title">Cartwheel</span>A sideways handspring &mdash; the body inverts and rotates through a wheel, planting the hands and then swinging the legs overhead before landing on the feet.</p>
+                    </article>
+                    <article class="carousel-card">
+                        <img src="humanoid_skills/front_flip.gif" loop muted playsinline alt="Humanoid front flip" />
+                        <p><span class="c-title">Front Flip</span>A forward aerial somersault: the humanoid launches upward, tucks into a full front rotation, and lands upright on both feet.</p>
+                    </article>
+                    <article class="carousel-card">
+                        <img src="humanoid_skills/side_flip.gif" loop muted playsinline alt="Humanoid side flip" />
+                        <p><span class="c-title">Side Flip</span>A lateral aerial somersault, rotating a full turn sideways through the air and recovering to a stable standing pose.</p>
+                    </article>
+                    <article class="carousel-card">
+                        <img src="humanoid_skills/box_climb.gif" loop muted playsinline alt="Humanoid climbing onto a block" />
+                        <p><span class="c-title">Box Climb</span>The humanoid steps up and pulls its full body onto a raised block, coordinating hands and feet to mount the platform.</p>
+                    </article>
+                    <article class="carousel-card">
+                        <img src="humanoid_skills/stair_climb.gif" loop muted playsinline alt="Humanoid climbing stairs" />
+                        <p><span class="c-title">Stair Climb</span>Ascending a flight of steps with alternating footfalls, shifting weight forward to lift the body up each stair.</p>
+                    </article>
+                    <article class="carousel-card">
+                        <img src="humanoid_skills/sit_chair.gif" loop muted playsinline alt="Humanoid sitting on a chair" />
+                        <p><span class="c-title">Sit on Chair</span>Approaching a chair and lowering the body into a stable seated posture, settling its weight onto the seat.</p>
+                    </article>
+                    <article class="carousel-card">
+                        <img src="humanoid_skills/carry_box.gif" loop muted playsinline alt="Humanoid carrying a box" />
+                        <p><span class="c-title">Carry Box</span>Picking up a box, holding it against the torso, and walking forward while keeping the load balanced.</p>
+                    </article>
+                    <article class="carousel-card">
+                        <img src="humanoid_skills/crawl.gif" loop muted playsinline alt="Humanoid crawling" />
+                        <p><span class="c-title">Crawl</span>Moving forward on hands and knees, staying low to the ground with a coordinated four-point crawling gait.</p>
                     </article>
                 </div>
             </div>
@@ -1052,6 +1118,26 @@
                     </article>
                 </div>
             </div>
+        </div>
+
+        <!-- ── Teacher–Student Visualization ── -->
+        <div class="section" id="teacher-student">
+            <div class="section-label"><h2>Teacher&ndash;Student Visualization</h2></div>
+            <p class="section-intro">
+                We distill the trained teacher policy into a deployable student policy that runs from onboard
+                observations alone. Below, all three tracks execute the same four-leg-to-handstand spin transition
+                side by side, the student stays in near-lockstep with both the teacher and the reference,
+                showing that distillation preserves this difficult, dynamic skill.
+            </p>
+            <figure class="method-figure ts-figure">
+                <img src="teacher_student/4leg_to_handstand_spin.gif" loop muted playsinline alt="Reference, teacher, and student policies executing a four-leg-to-handstand spin transition side by side" />
+                <figcaption>
+                    Four-leg to handstand spin transition. Left to right: the MimicAgent reference
+                    (<span class="ref-green">green</span>), the teacher policy (<span class="ref-blue">blue</span>),
+                    and the distilled student policy (<span class="ref-pink">magenta</span>), executing the skill in
+                    synchrony. The student reproduces the teacher's behavior using only the deployable observation space.
+                </figcaption>
+            </figure>
         </div>
 
         <!-- ── Citation ── -->
