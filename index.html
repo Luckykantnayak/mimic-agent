@@ -281,7 +281,7 @@
             margin: 0 auto;
         }
 
-        .method-figure img {
+        .method-figure img, .method-figure video {
             width: 100%;
             height: auto;
             display: block;
@@ -556,7 +556,7 @@
             box-shadow: var(--card-shadow);
         }
 
-        .carousel-card img {
+        .carousel-card img, .carousel-card video {
             width: 100%;
             height: 320px;
             object-fit: cover;
@@ -621,22 +621,22 @@
         @media (max-width: 768px) {
             .carousel-stage { height: 320px; }
             .carousel-card { width: 76%; left: 12%; }
-            .carousel-card img { height: 220px; }
+            .carousel-card img, .carousel-card video { height: 220px; }
             .carousel-card.is-left,
             .carousel-card.is-right { opacity: 0; pointer-events: none; }
         }
 
         /* ── Hardware carousel: wide 480x180 clips get shorter, full-width cards ── */
         .hw-carousel .carousel-stage { height: 300px; }
-        .hw-carousel .carousel-card img { height: auto; aspect-ratio: 8 / 3; }
+        .hw-carousel .carousel-card img, .hw-carousel .carousel-card video { height: auto; aspect-ratio: 8 / 3; }
 
         /* ── SMPL carousel: 16:9 humanoid renders, shown full-frame ── */
         .smpl-carousel .carousel-stage { height: 380px; }
-        .smpl-carousel .carousel-card img { height: auto; aspect-ratio: 16 / 9; }
+        .smpl-carousel .carousel-card img, .smpl-carousel .carousel-card video { height: auto; aspect-ratio: 16 / 9; }
 
         /* ── Humanoid difficult-skills carousel: 8:5 renders, shown full-frame ── */
         .hard-carousel .carousel-stage { height: 400px; }
-        .hard-carousel .carousel-card img { height: auto; aspect-ratio: 8 / 5; }
+        .hard-carousel .carousel-card img, .hard-carousel .carousel-card video { height: auto; aspect-ratio: 8 / 5; }
 
         /* ── Teacher–student figure: single centered clip, capped width ── */
         .ts-figure { max-width: 780px; }
@@ -743,11 +743,11 @@
         <div class="section">
             <div class="grid-container skills-grid">
                 <div class="grid-item">
-                    <img src="2-HAND-SKATING/2legged_skating_side.gif" loop muted playsinline alt="Side view of skating on two legs" />
+                    <video class="lazy-media" loop muted playsinline poster="2-HAND-SKATING/2legged_skating_side.jpg" aria-label="Side view of skating on two legs"><source data-src="2-HAND-SKATING/2legged_skating_side.mp4" type="video/mp4"></video>
                     <p>Side view of skating on two legs</p>
                 </div>
                 <div class="grid-item">
-                    <img src="2-HAND-SKATING/2legged_skating_back.gif" loop muted playsinline alt="Back view of skating on two legs" />
+                    <video class="lazy-media" loop muted playsinline poster="2-HAND-SKATING/2legged_skating_back.jpg" aria-label="Back view of skating on two legs"><source data-src="2-HAND-SKATING/2legged_skating_back.mp4" type="video/mp4"></video>
                     <p>Back view of skating on two legs</p>
                 </div>
             </div>
@@ -808,63 +808,63 @@
                     <span class="skill-name">Trot</span>
                     <span class="skill-desc">A steady forward gait where diagonal leg pairs alternate in synchronized stance and swing phases while tracking commanded velocity.</span>
                 </div>
-                <div class="grid-item"><img src="Survey_videos/eureka_gifs/eureka_go2_trot.gif" loop muted playsinline alt="Eureka walking" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_KEYFRAME/go2_walking_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing walking" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_MIMIC/SKILL_TROT_WALK_Go20000-0299.gif" loop muted playsinline alt="MimicAgent walking" /></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/eureka_gifs/eureka_go2_trot.jpg" aria-label="Eureka walking"><source data-src="Survey_videos/eureka_gifs/eureka_go2_trot.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_KEYFRAME/go2_walking_mimickit0000-0299.jpg" aria-label="Keyframing walking"><source data-src="Survey_videos/BASELINE_KEYFRAME/go2_walking_mimickit0000-0299.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_MIMIC/SKILL_TROT_WALK_Go20000-0299.jpg" aria-label="MimicAgent walking"><source data-src="Survey_videos/BASELINE_MIMIC/SKILL_TROT_WALK_Go20000-0299.mp4" type="video/mp4"></video></div>
 
                 <!-- Bounding -->
                 <div class="skill-label">
                     <span class="skill-name">Bound</span>
                     <span class="skill-desc">A dynamic gait where the front legs move together and the hind legs move together, producing powerful push-offs and brief aerial phases for fast forward motion.</span>
                 </div>
-                <div class="grid-item"><img src="Survey_videos/eureka_gifs/eureka_go2_bound.gif" loop muted playsinline alt="Eureka bounding" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_KEYFRAME/go2_bounding_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing bounding" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_MIMIC/unitree_go2_SKILL_BOUND_WALK_Go2.gif" loop muted playsinline alt="MimicAgent bounding" /></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/eureka_gifs/eureka_go2_bound.jpg" aria-label="Eureka bounding"><source data-src="Survey_videos/eureka_gifs/eureka_go2_bound.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_KEYFRAME/go2_bounding_mimickit0000-0299.jpg" aria-label="Keyframing bounding"><source data-src="Survey_videos/BASELINE_KEYFRAME/go2_bounding_mimickit0000-0299.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_MIMIC/unitree_go2_SKILL_BOUND_WALK_Go2.jpg" aria-label="MimicAgent bounding"><source data-src="Survey_videos/BASELINE_MIMIC/unitree_go2_SKILL_BOUND_WALK_Go2.mp4" type="video/mp4"></video></div>
 
                 <!-- Side Flip -->
                 <div class="skill-label">
                     <span class="skill-name">Side Flip</span>
                     <span class="skill-desc">A lateral acrobatic maneuver where the robot jumps and performs a full rotation about its forward axis before landing stably.</span>
                 </div>
-                <div class="grid-item"><img src="Survey_videos/eureka_gifs/eureka_go2w_sideflip.gif" loop muted playsinline alt="Eureka side flip" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_KEYFRAME/go2w_sideflip_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing side flip" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_MIMIC/SKILL_SIDEFLIP_AW0000-0037.gif" loop muted playsinline alt="MimicAgent side flip" /></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/eureka_gifs/eureka_go2w_sideflip.jpg" aria-label="Eureka side flip"><source data-src="Survey_videos/eureka_gifs/eureka_go2w_sideflip.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_KEYFRAME/go2w_sideflip_mimickit0000-0299.jpg" aria-label="Keyframing side flip"><source data-src="Survey_videos/BASELINE_KEYFRAME/go2w_sideflip_mimickit0000-0299.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_MIMIC/SKILL_SIDEFLIP_AW0000-0037.jpg" aria-label="MimicAgent side flip"><source data-src="Survey_videos/BASELINE_MIMIC/SKILL_SIDEFLIP_AW0000-0037.mp4" type="video/mp4"></video></div>
 
                 <!-- Front Flip -->
                 <div class="skill-label">
                     <span class="skill-name">Front Flip</span>
                     <span class="skill-desc">A forward somersault where the robot launches upward, rotates about its lateral axis, and lands back on its feet.</span>
                 </div>
-                <div class="grid-item"><img src="Survey_videos/eureka_gifs/eureka_go2w_frontflip.gif" loop muted playsinline alt="Eureka front flip" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_KEYFRAME/go2w_frontflip_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing front flip" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_MIMIC/SKILL_FRONTFLIP_AW0000-0299.gif" loop muted playsinline alt="MimicAgent front flip" /></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/eureka_gifs/eureka_go2w_frontflip.jpg" aria-label="Eureka front flip"><source data-src="Survey_videos/eureka_gifs/eureka_go2w_frontflip.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_KEYFRAME/go2w_frontflip_mimickit0000-0299.jpg" aria-label="Keyframing front flip"><source data-src="Survey_videos/BASELINE_KEYFRAME/go2w_frontflip_mimickit0000-0299.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_MIMIC/SKILL_FRONTFLIP_AW0000-0299.jpg" aria-label="MimicAgent front flip"><source data-src="Survey_videos/BASELINE_MIMIC/SKILL_FRONTFLIP_AW0000-0299.mp4" type="video/mp4"></video></div>
 
                 <!-- Aerial Crossover -->
                 <div class="skill-label">
                     <span class="skill-name">Aerial Crossover</span>
                     <span class="skill-desc">A dynamic maneuver where the robot leaps into the air and crosses its legs mid-flight before reestablishing stable ground contact.</span>
                 </div>
-                <div class="grid-item"><img src="Survey_videos/eureka_gifs/eureka_go2w_aerialcrossover.gif" loop muted playsinline alt="Eureka aerial crossover" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_KEYFRAME/go2w_aerialcrossover_mimickit0000-0299.gif" loop muted playsinline alt="Keyframing aerial crossover" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_MIMIC/SKILL_AERIAL_CROSSOVER_RECOVERY_AW0000-0299.gif" loop muted playsinline alt="MimicAgent aerial crossover" /></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/eureka_gifs/eureka_go2w_aerialcrossover.jpg" aria-label="Eureka aerial crossover"><source data-src="Survey_videos/eureka_gifs/eureka_go2w_aerialcrossover.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_KEYFRAME/go2w_aerialcrossover_mimickit0000-0299.jpg" aria-label="Keyframing aerial crossover"><source data-src="Survey_videos/BASELINE_KEYFRAME/go2w_aerialcrossover_mimickit0000-0299.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_MIMIC/SKILL_AERIAL_CROSSOVER_RECOVERY_AW0000-0299.jpg" aria-label="MimicAgent aerial crossover"><source data-src="Survey_videos/BASELINE_MIMIC/SKILL_AERIAL_CROSSOVER_RECOVERY_AW0000-0299.mp4" type="video/mp4"></video></div>
 
                 <!-- Crab Diagonal Scuttle -->
                 <div class="skill-label">
                     <span class="skill-name">Crab Diagonal Scuttle</span>
                     <span class="skill-desc">Diagonal locomotion with the body oriented perpendicular to the travel direction, scuttling sideways like a crab.</span>
                 </div>
-                <div class="grid-item"><img src="Survey_videos/eureka_gifs/EUREKA_CRAB_DIAGONAL_SCUTTLE.gif" loop muted playsinline alt="Eureka crab diagonal scuttle" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_KEYFRAME/KEYFRAME_CRAB_DIAGONAL_SCUTTLE.gif" loop muted playsinline alt="Keyframing crab diagonal scuttle" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_MIMIC/MIMICAGENT_CRAB_DIAGONAL_SCUTTLE.gif" loop muted playsinline alt="MimicAgent crab diagonal scuttle" /></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/eureka_gifs/EUREKA_CRAB_DIAGONAL_SCUTTLE.jpg" aria-label="Eureka crab diagonal scuttle"><source data-src="Survey_videos/eureka_gifs/EUREKA_CRAB_DIAGONAL_SCUTTLE.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_KEYFRAME/KEYFRAME_CRAB_DIAGONAL_SCUTTLE.jpg" aria-label="Keyframing crab diagonal scuttle"><source data-src="Survey_videos/BASELINE_KEYFRAME/KEYFRAME_CRAB_DIAGONAL_SCUTTLE.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_MIMIC/MIMICAGENT_CRAB_DIAGONAL_SCUTTLE.jpg" aria-label="MimicAgent crab diagonal scuttle"><source data-src="Survey_videos/BASELINE_MIMIC/MIMICAGENT_CRAB_DIAGONAL_SCUTTLE.mp4" type="video/mp4"></video></div>
 
                 <!-- Reverberating Yaw Pulse -->
                 <div class="skill-label">
                     <span class="skill-name">Reverberating Yaw Pulse</span>
                     <span class="skill-desc">In-place yaw rotation driven by damped oscillatory pulses that gradually settle.</span>
                 </div>
-                <div class="grid-item"><img src="Survey_videos/eureka_gifs/EUREKA_REVERB_YAW_PULSE.gif" loop muted playsinline alt="Eureka reverberating yaw pulse" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_KEYFRAME/KEYFRAME_REVERB_YAW_PULSE.gif" loop muted playsinline alt="Keyframing reverberating yaw pulse" /></div>
-                <div class="grid-item"><img src="Survey_videos/BASELINE_MIMIC/MIMICAGENT_REVERB_YAW_PULSE.gif" loop muted playsinline alt="MimicAgent reverberating yaw pulse" /></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/eureka_gifs/EUREKA_REVERB_YAW_PULSE.jpg" aria-label="Eureka reverberating yaw pulse"><source data-src="Survey_videos/eureka_gifs/EUREKA_REVERB_YAW_PULSE.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_KEYFRAME/KEYFRAME_REVERB_YAW_PULSE.jpg" aria-label="Keyframing reverberating yaw pulse"><source data-src="Survey_videos/BASELINE_KEYFRAME/KEYFRAME_REVERB_YAW_PULSE.mp4" type="video/mp4"></video></div>
+                <div class="grid-item"><video class="lazy-media" loop muted playsinline poster="Survey_videos/BASELINE_MIMIC/MIMICAGENT_REVERB_YAW_PULSE.jpg" aria-label="MimicAgent reverberating yaw pulse"><source data-src="Survey_videos/BASELINE_MIMIC/MIMICAGENT_REVERB_YAW_PULSE.mp4" type="video/mp4"></video></div>
 
             </div>
 
@@ -945,51 +945,51 @@
                 <button class="carousel-btn next" type="button" aria-label="Next skill">&#10095;</button>
                 <div class="carousel-stage">
                     <article class="carousel-card">
-                        <img src="LLM_Skills/SKILL_TORNADO_SPIN_DRIFT_AW0000-0115.gif" loop muted playsinline alt="Tornado Spin Drift" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/SKILL_TORNADO_SPIN_DRIFT_AW0000-0115.jpg" aria-label="Tornado Spin Drift"><source data-src="LLM_Skills/SKILL_TORNADO_SPIN_DRIFT_AW0000-0115.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Tornado Spin Drift</span>Rapid in-place yaw spinning with expanding and contracting limb radius, creating a tornado-like appearance.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="LLM_Skills/SKILL_INCHWORM_COMPRESSION_PW0000-0299.gif" loop muted playsinline alt="Inchworm Compression" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/SKILL_INCHWORM_COMPRESSION_PW0000-0299.jpg" aria-label="Inchworm Compression"><source data-src="LLM_Skills/SKILL_INCHWORM_COMPRESSION_PW0000-0299.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Inchworm Compression</span>Forward motion through alternating full-body compression and extension cycles.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="LLM_Skills/SKILL_METRONOME_SWAY_ADVANCE_AW0000-0299.gif" loop muted playsinline alt="Metronome Sway Advance" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/SKILL_METRONOME_SWAY_ADVANCE_AW0000-0299.jpg" aria-label="Metronome Sway Advance"><source data-src="LLM_Skills/SKILL_METRONOME_SWAY_ADVANCE_AW0000-0299.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Metronome Sway Advance</span>Forward locomotion driven by large-amplitude lateral base swaying, rocking side to side like an inverted-pendulum metronome.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="LLM_Skills/SKILL_PROPELLER_SPIN_ADVANCE_AW0000-0299.gif" loop muted playsinline alt="Propeller Spin Advance" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/SKILL_PROPELLER_SPIN_ADVANCE_AW0000-0299.jpg" aria-label="Propeller Spin Advance"><source data-src="LLM_Skills/SKILL_PROPELLER_SPIN_ADVANCE_AW0000-0299.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Propeller Spin Advance</span>Forward skating using propeller-like leg rotations for continuous thrust.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="LLM_Skills/SKILL_REVERSE_CARTWHEEL_DRIFT_AW0000-0299.gif" loop muted playsinline alt="Reverse Cartwheel Drift" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/SKILL_REVERSE_CARTWHEEL_DRIFT_AW0000-0299.jpg" aria-label="Reverse Cartwheel Drift"><source data-src="LLM_Skills/SKILL_REVERSE_CARTWHEEL_DRIFT_AW0000-0299.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Reverse Cartwheel Drift</span>Backward lateral locomotion via cartwheel-style rotations where the legs trace circular arcs while drifting backward.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="LLM_Skills/SKILL_ASYNC_LISSAJOUS_CRAWL_PW0000-0299.gif" loop muted playsinline alt="Async Lissajous Crawl" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/SKILL_ASYNC_LISSAJOUS_CRAWL_PW0000-0299.jpg" aria-label="Async Lissajous Crawl"><source data-src="LLM_Skills/SKILL_ASYNC_LISSAJOUS_CRAWL_PW0000-0299.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Async Lissajous Crawl</span>Forward locomotion using fully independent leg motions, where each leg traces a distinct periodic trajectory that together produce smooth, stable translation.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="LLM_Skills/SKILL_DIAMOND_ROTATE_STEP_AW0000-0299.gif" loop muted playsinline alt="Diamond Rotate Step" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/SKILL_DIAMOND_ROTATE_STEP_AW0000-0299.jpg" aria-label="Diamond Rotate Step"><source data-src="LLM_Skills/SKILL_DIAMOND_ROTATE_STEP_AW0000-0299.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Diamond Rotate Step</span>The legs trace a diamond-shaped pattern on the ground while the robot turns in place.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="LLM_Skills/SKILL_HAMMOCK_SWING_TURN_PW0000-0299.gif" loop muted playsinline alt="Hammock Swing Turn" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/SKILL_HAMMOCK_SWING_TURN_PW0000-0299.jpg" aria-label="Hammock Swing Turn"><source data-src="LLM_Skills/SKILL_HAMMOCK_SWING_TURN_PW0000-0299.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Hammock Swing Turn</span>A turning gait where the base sways side to side, perpendicular to the travel direction, like a swinging hammock.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="LLM_Skills/SKILL_ORBITING_SATELLITES_AW0000-0299.gif" loop muted playsinline alt="Orbiting Satellites" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/SKILL_ORBITING_SATELLITES_AW0000-0299.jpg" aria-label="Orbiting Satellites"><source data-src="LLM_Skills/SKILL_ORBITING_SATELLITES_AW0000-0299.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Orbiting Satellites</span>Forward locomotion where diagonal leg pairs orbit around their shared center while the base translates.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="LLM_Skills/SKILL_PINWHEEL_LATERAL_SPIN_AW0000-0299.gif" loop muted playsinline alt="Pinwheel Lateral Spin" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/SKILL_PINWHEEL_LATERAL_SPIN_AW0000-0299.jpg" aria-label="Pinwheel Lateral Spin"><source data-src="LLM_Skills/SKILL_PINWHEEL_LATERAL_SPIN_AW0000-0299.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Pinwheel Lateral Spin</span>Sideways locomotion where the legs rotate like pinwheel blades while the base translates laterally.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="LLM_Skills/COMPARE_BACKFLIP_HANDSTAND.gif" loop muted playsinline alt="Backflip to Handstand" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/COMPARE_BACKFLIP_HANDSTAND.jpg" aria-label="Backflip to Handstand"><source data-src="LLM_Skills/COMPARE_BACKFLIP_HANDSTAND.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Backflip to Handstand</span>The robot launches into a backward flip and recovers into a balanced handstand, holding its weight on its two front legs.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="LLM_Skills/COMPARE_4LEG_HANDSTAND_TRANSITION.gif" loop muted playsinline alt="Four-Leg to Handstand transition" />
+                        <video class="lazy-media" loop muted playsinline poster="LLM_Skills/COMPARE_4LEG_HANDSTAND_TRANSITION.jpg" aria-label="Four-Leg to Handstand transition"><source data-src="LLM_Skills/COMPARE_4LEG_HANDSTAND_TRANSITION.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Four-Leg to Handstand</span>From a normal four-legged stance, the robot shifts its weight forward and rises smoothly into a handstand, balancing on its front legs.</p>
                     </article>
                 </div>
@@ -1010,23 +1010,23 @@
                 <button class="carousel-btn next" type="button" aria-label="Next trajectory">&#10095;</button>
                 <div class="carousel-stage">
                     <article class="carousel-card">
-                        <img src="smpl_mimic/SMPL_WALK.gif" loop muted playsinline alt="SMPL humanoid walking" />
+                        <video class="lazy-media" loop muted playsinline poster="smpl_mimic/SMPL_WALK.jpg" aria-label="SMPL humanoid walking"><source data-src="smpl_mimic/SMPL_WALK.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Walk</span>A natural bipedal walking gait with alternating heel-to-toe steps and coordinated arm swing.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="smpl_mimic/SMPL_RUN.gif" loop muted playsinline alt="SMPL humanoid running" />
+                        <video class="lazy-media" loop muted playsinline poster="smpl_mimic/SMPL_RUN.jpg" aria-label="SMPL humanoid running"><source data-src="smpl_mimic/SMPL_RUN.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Run</span>A dynamic run with a clear airborne flight phase and pronounced arm drive propelling the body forward.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="smpl_mimic/SMPL_JUMP.gif" loop muted playsinline alt="SMPL humanoid jumping" />
+                        <video class="lazy-media" loop muted playsinline poster="smpl_mimic/SMPL_JUMP.jpg" aria-label="SMPL humanoid jumping"><source data-src="smpl_mimic/SMPL_JUMP.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Jump</span>An explosive vertical jump — crouch, launch, and soft landing — with the whole body coordinating takeoff and absorption.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="smpl_mimic/SMPL_KICK.gif" loop muted playsinline alt="SMPL humanoid kicking" />
+                        <video class="lazy-media" loop muted playsinline poster="smpl_mimic/SMPL_KICK.jpg" aria-label="SMPL humanoid kicking"><source data-src="smpl_mimic/SMPL_KICK.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Kick</span>A balanced single-leg kick that swings one leg forward while the torso and arms counterbalance to stay upright.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="smpl_mimic/SMPL_SPIN.gif" loop muted playsinline alt="SMPL humanoid spinning" />
+                        <video class="lazy-media" loop muted playsinline poster="smpl_mimic/SMPL_SPIN.jpg" aria-label="SMPL humanoid spinning"><source data-src="smpl_mimic/SMPL_SPIN.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Spin</span>A full-body turn about the vertical axis, with the arms tucked and the feet repositioning to carry the rotation around.</p>
                     </article>
                 </div>
@@ -1049,47 +1049,47 @@
                 <button class="carousel-btn next" type="button" aria-label="Next skill">&#10095;</button>
                 <div class="carousel-stage">
                     <article class="carousel-card">
-                        <img src="humanoid_skills/ballet_spin.gif" loop muted playsinline alt="Humanoid ballet spin" />
+                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/ballet_spin.jpg" aria-label="Humanoid ballet spin"><source data-src="humanoid_skills/ballet_spin.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Ballet Spin</span>A controlled full-body pirouette, spinning about the vertical axis on a single supporting leg while the arms extend for balance.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="humanoid_skills/cartwheel.gif" loop muted playsinline alt="Humanoid cartwheel" />
+                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/cartwheel.jpg" aria-label="Humanoid cartwheel"><source data-src="humanoid_skills/cartwheel.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Cartwheel</span>A sideways handspring &mdash; the body inverts and rotates through a wheel, planting the hands and then swinging the legs overhead before landing on the feet.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="humanoid_skills/front_flip.gif" loop muted playsinline alt="Humanoid front flip" />
+                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/front_flip.jpg" aria-label="Humanoid front flip"><source data-src="humanoid_skills/front_flip.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Front Flip</span>A forward aerial somersault: the humanoid launches upward, tucks into a full front rotation, and lands upright on both feet.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="humanoid_skills/side_flip.gif" loop muted playsinline alt="Humanoid side flip" />
+                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/side_flip.jpg" aria-label="Humanoid side flip"><source data-src="humanoid_skills/side_flip.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Side Flip</span>A lateral aerial somersault, rotating a full turn sideways through the air and recovering to a stable standing pose.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="humanoid_skills/handstand_walk.gif" loop muted playsinline alt="Humanoid walking on its hands in a handstand" />
+                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/handstand_walk.jpg" aria-label="Humanoid walking on its hands in a handstand"><source data-src="humanoid_skills/handstand_walk.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Handstand Walk</span>The humanoid kicks up into a full handstand and travels forward on its hands, balancing the inverted body while stepping hand over hand.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="humanoid_skills/hurdle_flip.gif" loop muted playsinline alt="Humanoid flipping over a hurdle" />
+                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/hurdle_flip.jpg" aria-label="Humanoid flipping over a hurdle"><source data-src="humanoid_skills/hurdle_flip.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Hurdle Flip</span>A running approach into an aerial flip over a hurdle &mdash; the humanoid launches off one foot, rotates over the obstacle, and lands on the far side.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="humanoid_skills/box_climb.gif" loop muted playsinline alt="Humanoid climbing onto a block" />
+                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/box_climb.jpg" aria-label="Humanoid climbing onto a block"><source data-src="humanoid_skills/box_climb.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Box Climb</span>The humanoid steps up and pulls its full body onto a raised block, coordinating hands and feet to mount the platform.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="humanoid_skills/stair_climb.gif" loop muted playsinline alt="Humanoid climbing stairs" />
+                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/stair_climb.jpg" aria-label="Humanoid climbing stairs"><source data-src="humanoid_skills/stair_climb.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Stair Climb</span>Ascending a flight of steps with alternating footfalls, shifting weight forward to lift the body up each stair.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="humanoid_skills/sit_chair.gif" loop muted playsinline alt="Humanoid sitting on a chair" />
+                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/sit_chair.jpg" aria-label="Humanoid sitting on a chair"><source data-src="humanoid_skills/sit_chair.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Sit on Chair</span>Approaching a chair and lowering the body into a stable seated posture, settling its weight onto the seat.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="humanoid_skills/carry_box.gif" loop muted playsinline alt="Humanoid carrying a box" />
+                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/carry_box.jpg" aria-label="Humanoid carrying a box"><source data-src="humanoid_skills/carry_box.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Carry Box</span>Picking up a box, holding it against the torso, and walking forward while keeping the load balanced.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="humanoid_skills/crawl.gif" loop muted playsinline alt="Humanoid crawling" />
+                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/crawl.jpg" aria-label="Humanoid crawling"><source data-src="humanoid_skills/crawl.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Crawl</span>Moving forward on hands and knees, staying low to the ground with a coordinated four-point crawling gait.</p>
                     </article>
                 </div>
@@ -1109,19 +1109,19 @@
                 <button class="carousel-btn next" type="button" aria-label="Next clip">&#10095;</button>
                 <div class="carousel-stage">
                     <article class="carousel-card">
-                        <img src="hw/4leg_walking.gif" loop muted playsinline alt="Four-legged trot on hardware" />
+                        <video class="lazy-media" loop muted playsinline poster="hw/4leg_walking.jpg" aria-label="Four-legged trot on hardware"><source data-src="hw/4leg_walking.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Four-Legged Trot</span>Walking policy on the physical robot — a stable four-legged trot gait on flat ground, following a 0.5 m/s velocity command.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="hw/2leg_walking.gif" loop muted playsinline alt="Walking on two front legs on hardware" />
+                        <video class="lazy-media" loop muted playsinline poster="hw/2leg_walking.jpg" aria-label="Walking on two front legs on hardware"><source data-src="hw/2leg_walking.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Two-Legged Walk</span>Walking on its two front legs while maintaining balance and following 0.4 m/s.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="hw/2leg_skating.gif" loop muted playsinline alt="Skating on two front legs on hardware" />
+                        <video class="lazy-media" loop muted playsinline poster="hw/2leg_skating.jpg" aria-label="Skating on two front legs on hardware"><source data-src="hw/2leg_skating.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Two-Legged Skating</span>Skating on its two front legs through a push–glide–push sequence at 0.4 m/s.</p>
                     </article>
                     <article class="carousel-card">
-                        <img src="hw/roll_on_front_wheels.gif" loop muted playsinline alt="Rolling forward on two front legs on hardware" />
+                        <video class="lazy-media" loop muted playsinline poster="hw/roll_on_front_wheels.jpg" aria-label="Rolling forward on two front legs on hardware"><source data-src="hw/roll_on_front_wheels.mp4" type="video/mp4"></video>
                         <p><span class="c-title">Two-Legged Roll</span>Rolling forward on just its two front legs, keeping the torso parallel to the ground and lifting the back legs.</p>
                     </article>
                 </div>
@@ -1138,7 +1138,7 @@
                 showing that distillation preserves this difficult, dynamic skill.
             </p>
             <figure class="method-figure ts-figure">
-                <img src="teacher_student/4leg_to_handstand_spin.gif" loop muted playsinline alt="Reference, teacher, and student policies executing a four-leg-to-handstand spin transition side by side" />
+                <video class="lazy-media" loop muted playsinline poster="teacher_student/4leg_to_handstand_spin.jpg" aria-label="Reference, teacher, and student policies executing a four-leg-to-handstand spin transition side by side"><source data-src="teacher_student/4leg_to_handstand_spin.mp4" type="video/mp4"></video>
                 <figcaption>
                     Four-leg to handstand spin transition. Left to right: the MimicAgent reference
                     (<span class="ref-green">green</span>), the teacher policy (<span class="ref-blue">blue</span>),
@@ -1231,6 +1231,30 @@
             window.addEventListener('scroll', onScroll, { passive: true });
             window.addEventListener('resize', onScroll);
             onScroll();
+        })();
+
+        // ── Lazy media: fetch + autoplay each clip as it nears view, pause off-screen ──
+        (function () {
+            var vids = Array.prototype.slice.call(document.querySelectorAll('video.lazy-media'));
+            if (!vids.length) return;
+            function load(v) {
+                if (v.dataset.loaded) return;
+                var s = v.querySelector('source[data-src]');
+                if (s && !s.src) { s.src = s.getAttribute('data-src'); v.load(); }
+                v.dataset.loaded = '1';
+            }
+            function play(v) { v.muted = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+            if (!('IntersectionObserver' in window)) {
+                vids.forEach(function (v) { load(v); play(v); });
+                return;
+            }
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) { load(e.target); play(e.target); }
+                    else { e.target.pause(); }
+                });
+            }, { rootMargin: '300px 0px', threshold: 0.01 });
+            vids.forEach(function (v) { io.observe(v); });
         })();
     </script>
 </body>
