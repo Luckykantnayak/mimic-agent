@@ -628,6 +628,10 @@
 
         /* ── Hardware carousel: wide 480x180 clips get shorter, full-width cards ── */
         .hw-carousel .carousel-stage { height: 300px; }
+        .sr { display: block; margin-top: 0.45rem; font-family: var(--mono); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.01em; }
+        .sr-full { color: #2f8f3e; }   /* 5/5 */
+        .sr-high { color: #b07a12; }   /* 4/5 */
+        .sr-mid  { color: #b4512f; }   /* 3/5 */
         .hw-carousel .carousel-card img, .hw-carousel .carousel-card video { height: auto; aspect-ratio: 8 / 3; }
 
         /* ── SMPL carousel: 16:9 humanoid renders, shown full-frame ── */
@@ -1078,31 +1082,31 @@
                 <div class="carousel-stage">
                     <article class="carousel-card">
                         <video class="lazy-media" loop muted playsinline poster="hw/spin_transition.jpg" aria-label="Four-leg to handstand spin transition on hardware"><source data-src="hw/spin_transition.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Spin Transition</span>Spinning in place on all four legs, then transitioning onto its two front legs with a clean lift-off &mdash; successful in 5 of 5 trials.</p>
+                        <p><span class="c-title">Spin Transition</span>Spinning in place on all four legs, then transitioning onto its two front legs with a clean lift-off.<span class="sr sr-full">Success rate: 100% (5/5 trials)</span></p>
                     </article>
                     <article class="carousel-card">
                         <video class="lazy-media" loop muted playsinline poster="hw/back_flip.jpg" aria-label="Back flip on hardware"><source data-src="hw/back_flip.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Back Flip</span>A backward somersault from a crouch, rotating a full turn before landing on its wheels &mdash; successful in 3 of 5 trials.</p>
+                        <p><span class="c-title">Back Flip</span>A backward somersault from a crouch, rotating a full turn before landing on its wheels.<span class="sr sr-mid">Success rate: 60% (3/5 trials)</span></p>
                     </article>
                     <article class="carousel-card">
                         <video class="lazy-media" loop muted playsinline poster="hw/4leg_walking.jpg" aria-label="Four-legged trot on hardware"><source data-src="hw/4leg_walking.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Four-Legged Trot</span>Walking policy on the physical robot — a stable four-legged trot gait on flat ground, following a 0.5 m/s velocity command.</p>
+                        <p><span class="c-title">Four-Legged Trot</span>Walking policy on the physical robot — a stable four-legged trot gait on flat ground, following a 0.5 m/s velocity command.<span class="sr sr-full">Success rate: 100% (5/5 trials)</span></p>
                     </article>
                     <article class="carousel-card">
                         <video class="lazy-media" loop muted playsinline poster="hw/2leg_walking.jpg" aria-label="Walking on two front legs on hardware"><source data-src="hw/2leg_walking.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Two-Legged Walk</span>Walking on its two front legs while maintaining balance and following 0.4 m/s.</p>
+                        <p><span class="c-title">Two-Legged Walk</span>Walking on its two front legs while maintaining balance and following 0.4 m/s.<span class="sr sr-full">Success rate: 100% (5/5 trials)</span></p>
                     </article>
                     <article class="carousel-card">
                         <video class="lazy-media" loop muted playsinline poster="hw/2leg_skating.jpg" aria-label="Skating on two front legs on hardware"><source data-src="hw/2leg_skating.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Two-Legged Skating</span>Skating on its two front legs through a push–glide–push sequence at 0.4 m/s.</p>
+                        <p><span class="c-title">Two-Legged Skating</span>Skating on its two front legs through a push–glide–push sequence at 0.4 m/s.<span class="sr sr-high">Success rate: 80% (4/5 trials)</span></p>
                     </article>
                     <article class="carousel-card">
                         <video class="lazy-media" loop muted playsinline poster="hw/roll_on_front_wheels.jpg" aria-label="Rolling forward on two front legs on hardware"><source data-src="hw/roll_on_front_wheels.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Two-Legged Roll</span>Rolling forward on just its two front legs, keeping the torso parallel to the ground and lifting the back legs.</p>
+                        <p><span class="c-title">Two-Legged Roll</span>Rolling forward on just its two front legs, keeping the torso parallel to the ground and lifting the back legs.<span class="sr sr-high">Success rate: 80% (4/5 trials)</span></p>
                     </article>
                     <article class="carousel-card">
                         <video class="lazy-media" loop muted playsinline poster="hw/side_flip.jpg" aria-label="Side flip on hardware"><source data-src="hw/side_flip.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Side Flip</span>A full lateral rotation through the air, landing back on all four wheels &mdash; successful in 5 of 5 trials.</p>
+                        <p><span class="c-title">Side Flip</span>A full lateral rotation through the air, landing back on all four wheels.<span class="sr sr-full">Success rate: 100% (5/5 trials)</span></p>
                     </article>
                 </div>
             </div>
