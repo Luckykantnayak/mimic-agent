@@ -715,7 +715,6 @@
             <p class="equal-contrib">* Equal contribution</p>
 
             <div class="link-buttons">
-                <a href="https://arxiv.org/pdf/2609.24145" target="_blank" class="btn"><i class="fas fa-file-pdf"></i> Paper</a>
                 <a href="https://arxiv.org/abs/2609.24145" target="_blank" class="btn"><i class="fas fa-scroll"></i> arXiv</a>
                 <a href="https://github.com/Luckykantnayak/mimicagent-datagen/tree/main" target="_blank" class="btn"><i class="fab fa-github"></i> Code</a>
                 <a href="#" target="_blank" class="btn"><i class="fas fa-database"></i> Dataset</a>
@@ -730,8 +729,7 @@
             <li><a href="#method">Method</a></li>
             <li><a href="#baseline">Baseline Comparisons</a></li>
             <li><a href="#diverse-skills">Diverse Skills Demonstration</a></li>
-            <li><a href="#humanoid">Standard Humanoid Skills</a></li>
-            <li><a href="#humanoid-hard">Novel Humanoid Skills</a></li>
+            <li><a href="#humanoid">Humanoid Skills</a></li>
             <li><a href="#real-world">Real-World Deployment</a></li>
             <li><a href="#teacher-student">Teacher&ndash;Student Visualization</a></li>
             <li><a href="#citation">Citation</a></li>
@@ -767,17 +765,27 @@
         <div class="section" id="method">
             <div class="section-label"><h2>Method</h2></div>
             <figure class="method-figure">
-                <img src="media/method.png" alt="MimicAgent overview: Step 1 agentic trajectory generation from a text prompt, Step 2 example-guided reinforcement learning." />
+                <img src="media/method_overview.png" alt="MimicAgent overview: Step 1 agentic trajectory generation from a text prompt, Step 2 example-guided reinforcement learning." />
                 <figcaption>
-                    MimicAgent uses LLM coding agents within a recursive self-improvement loop to generate coarse
-                    reference trajectories (shown in <span class="ref-green">green</span>) from text prompts (Step&nbsp;1).
-                    Our agentic pipeline converts short text prompts into detailed skill descriptions, translates these
-                    into executable functions that describe base motion and foot trajectories over time, and outputs
-                    reference trajectories. We show that these coarse (and even dynamically-infeasible) motions are
-                    effective reference targets for example-guided RL, and that generating plausible trajectories with
-                    an LLM is often easier than designing robust reward functions for the same behaviors. The policy
-                    trained on these references then produces a dynamically-feasible rollout on the robot (shown in
-                    <span class="ref-blue">blue</span>) in physics simulation (Step&nbsp;2).
+                    <strong>Overview.</strong> MimicAgent uses LLM coding agents within a recursive self-improvement loop
+                    to generate coarse reference trajectories (shown in <span class="ref-green">green</span>) from text
+                    prompts (Step&nbsp;1). Our agentic pipeline converts short text prompts into detailed skill
+                    descriptions, translates these into executable functions that describe base and foot motion over
+                    time, and outputs them as reference trajectories. We show that these coarse motions are effective
+                    reference targets for example-guided RL (with policy rollouts shown in <span class="ref-blue">blue</span>, Step&nbsp;2).
+                </figcaption>
+            </figure>
+            <figure class="method-figure" style="margin-top: 2.8rem;">
+                <img src="media/method_detailed.png" alt="MimicAgent pipeline: task description and robot model feed a motion planner, code generator, code executor and unit tests, with a motion diagnosis loop that revises the skill code." />
+                <figcaption>
+                    <strong>MimicAgent pipeline.</strong> Given the prompt &ldquo;the wheeled quadruped performs a full
+                    forward flip and lands upright on all four wheels&rdquo;, our motion planner agent draws on prior
+                    knowledge of the robot model and the simulation environment API to decompose the skill into subparts.
+                    The code generator agent converts this phase plan into executable base and foot trajectories, which
+                    the kinematic executor renders. Task-agnostic unit tests then check the rendered motion for
+                    violations. The motion-diagnosis agent summarizes any failed checks and returns them as targeted
+                    feedback for code revision. This self-improvement loop repeats until the trajectory passes validation
+                    or the iteration budget is exhausted.
                 </figcaption>
             </figure>
         </div>
@@ -997,101 +1005,59 @@
             </div>
         </div>
 
-        <!-- ── Humanoid Trajectories (SMPL) ── -->
+        <!-- ── Humanoid Skills (Unitree G1) ── -->
         <div class="section" id="humanoid">
-            <div class="section-label"><h2>Standard Humanoid Skills</h2></div>
+            <div class="section-label"><h2>Humanoid Skills</h2></div>
             <p class="section-intro">
-                MimicAgent is not limited to quadrupeds, the same prompt-to-trajectory pipeline generates full-body
-                humanoid motions. Shown here on the SMPL body model are everyday motions that already appear in
-                standard motion-capture datasets; MimicAgent reproduces them directly from a text prompt.
+                Preliminary results show that MimicAgent can be adapted for humanoid locomotion on the Unitree G1.
+                Given the humanoid's model and configuration as context, the same prompt-to-trajectory framework
+                generates diverse whole-body skills, from acrobatics to climbing and interaction with objects.
+                Each clip shows the G1 reference motion (in <span class="ref-green">green</span>).
             </p>
 
-            <div class="carousel smpl-carousel" id="smplCarousel">
-                <button class="carousel-btn prev" type="button" aria-label="Previous trajectory">&#10094;</button>
-                <button class="carousel-btn next" type="button" aria-label="Next trajectory">&#10095;</button>
-                <div class="carousel-stage">
-                    <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="smpl_mimic/SMPL_WALK.jpg" aria-label="SMPL humanoid walking"><source data-src="smpl_mimic/SMPL_WALK.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Walk</span>A natural bipedal walking gait with alternating heel-to-toe steps and coordinated arm swing.</p>
-                    </article>
-                    <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="smpl_mimic/SMPL_RUN.jpg" aria-label="SMPL humanoid running"><source data-src="smpl_mimic/SMPL_RUN.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Run</span>A dynamic run with a clear airborne flight phase and pronounced arm drive propelling the body forward.</p>
-                    </article>
-                    <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="smpl_mimic/SMPL_JUMP.jpg" aria-label="SMPL humanoid jumping"><source data-src="smpl_mimic/SMPL_JUMP.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Jump</span>An explosive vertical jump — crouch, launch, and soft landing — with the whole body coordinating takeoff and absorption.</p>
-                    </article>
-                    <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="smpl_mimic/SMPL_KICK.jpg" aria-label="SMPL humanoid kicking"><source data-src="smpl_mimic/SMPL_KICK.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Kick</span>A balanced single-leg kick that swings one leg forward while the torso and arms counterbalance to stay upright.</p>
-                    </article>
-                    <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="smpl_mimic/SMPL_SPIN.jpg" aria-label="SMPL humanoid spinning"><source data-src="smpl_mimic/SMPL_SPIN.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Spin</span>A full-body turn about the vertical axis, with the arms tucked and the feet repositioning to carry the rotation around.</p>
-                    </article>
-                </div>
-            </div>
-        </div>
-
-        <!-- ── Humanoid Difficult Skills ── -->
-        <div class="section" id="humanoid-hard">
-            <div class="section-label"><h2>Novel Humanoid Skills</h2></div>
-            <p class="section-intro">
-                In contrast to the everyday motions above, these are novel, difficult skills &mdash; dynamic
-                acrobatics and contact-rich interaction with objects and terrain &mdash; many of which rarely or
-                never appear in motion-capture datasets. MimicAgent synthesizes each one from a text prompt alone,
-                going beyond what standard mocap corpora contain. Each clip shows the humanoid reference motion
-                (in <span class="ref-green">green</span>) produced by MimicAgent.
-            </p>
-
-            <div class="carousel hard-carousel" id="hardCarousel">
+            <div class="carousel smpl-carousel" id="g1Carousel">
                 <button class="carousel-btn prev" type="button" aria-label="Previous skill">&#10094;</button>
                 <button class="carousel-btn next" type="button" aria-label="Next skill">&#10095;</button>
                 <div class="carousel-stage">
                     <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/ballet_spin.jpg" aria-label="Humanoid ballet spin"><source data-src="humanoid_skills/ballet_spin.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Ballet Spin</span>A controlled full-body pirouette, spinning about the vertical axis on a single supporting leg while the arms extend for balance.</p>
+                        <video class="lazy-media" loop muted playsinline poster="g1_skills/ballet_spin.jpg" aria-label="Unitree G1 ballet spin"><source data-src="g1_skills/ballet_spin.mp4" type="video/mp4"></video>
+                        <p><span class="c-title">Ballet Spin</span>A controlled pirouette on a single supporting leg, with the arms extended for balance.</p>
                     </article>
                     <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/cartwheel.jpg" aria-label="Humanoid cartwheel"><source data-src="humanoid_skills/cartwheel.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Cartwheel</span>A sideways handspring &mdash; the body inverts and rotates through a wheel, planting the hands and then swinging the legs overhead before landing on the feet.</p>
+                        <video class="lazy-media" loop muted playsinline poster="g1_skills/cartwheel.jpg" aria-label="Unitree G1 cartwheel"><source data-src="g1_skills/cartwheel.mp4" type="video/mp4"></video>
+                        <p><span class="c-title">Cartwheel</span>A sideways rotation through hand support, swinging the legs overhead and landing back on the feet.</p>
                     </article>
                     <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/front_flip.jpg" aria-label="Humanoid front flip"><source data-src="humanoid_skills/front_flip.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Front Flip</span>A forward aerial somersault: the humanoid launches upward, tucks into a full front rotation, and lands upright on both feet.</p>
+                        <video class="lazy-media" loop muted playsinline poster="g1_skills/front_flip.jpg" aria-label="Unitree G1 front flip"><source data-src="g1_skills/front_flip.mp4" type="video/mp4"></video>
+                        <p><span class="c-title">Front Flip</span>A forward aerial somersault: crouch, launch, a full rotation, and an upright landing.</p>
                     </article>
                     <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/side_flip.jpg" aria-label="Humanoid side flip"><source data-src="humanoid_skills/side_flip.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Side Flip</span>A lateral aerial somersault, rotating a full turn sideways through the air and recovering to a stable standing pose.</p>
+                        <video class="lazy-media" loop muted playsinline poster="g1_skills/handstand_walk.jpg" aria-label="Unitree G1 handstand walk"><source data-src="g1_skills/handstand_walk.mp4" type="video/mp4"></video>
+                        <p><span class="c-title">Handstand Walk</span>Walking forward on the hands while balancing the inverted body.</p>
                     </article>
                     <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/handstand_walk.jpg" aria-label="Humanoid walking on its hands in a handstand"><source data-src="humanoid_skills/handstand_walk.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Handstand Walk</span>The humanoid kicks up into a full handstand and travels forward on its hands, balancing the inverted body while stepping hand over hand.</p>
+                        <video class="lazy-media" loop muted playsinline poster="g1_skills/hurdle_flip.jpg" aria-label="Unitree G1 hurdle flip"><source data-src="g1_skills/hurdle_flip.mp4" type="video/mp4"></video>
+                        <p><span class="c-title">Hurdle Flip</span>A running approach into a flip over a hurdle, landing on the far side.</p>
                     </article>
                     <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/hurdle_flip.jpg" aria-label="Humanoid flipping over a hurdle"><source data-src="humanoid_skills/hurdle_flip.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Hurdle Flip</span>A running approach into an aerial flip over a hurdle &mdash; the humanoid launches off one foot, rotates over the obstacle, and lands on the far side.</p>
+                        <video class="lazy-media" loop muted playsinline poster="g1_skills/box_climb.jpg" aria-label="Unitree G1 box climb"><source data-src="g1_skills/box_climb.mp4" type="video/mp4"></video>
+                        <p><span class="c-title">Box Climb</span>Bracing both hands on the edge of a platform and mantling up onto it.</p>
                     </article>
                     <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/box_climb.jpg" aria-label="Humanoid climbing onto a block"><source data-src="humanoid_skills/box_climb.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Box Climb</span>The humanoid steps up and pulls its full body onto a raised block, coordinating hands and feet to mount the platform.</p>
+                        <video class="lazy-media" loop muted playsinline poster="g1_skills/stair_climb.jpg" aria-label="Unitree G1 stair climb"><source data-src="g1_skills/stair_climb.mp4" type="video/mp4"></video>
+                        <p><span class="c-title">Stair Climb</span>Ascending a flight of steps with alternating footfalls and weight transfer.</p>
                     </article>
                     <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/stair_climb.jpg" aria-label="Humanoid climbing stairs"><source data-src="humanoid_skills/stair_climb.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Stair Climb</span>Ascending a flight of steps with alternating footfalls, shifting weight forward to lift the body up each stair.</p>
+                        <video class="lazy-media" loop muted playsinline poster="g1_skills/sit_chair.jpg" aria-label="Unitree G1 sit on chair"><source data-src="g1_skills/sit_chair.mp4" type="video/mp4"></video>
+                        <p><span class="c-title">Sit on Chair</span>Turning and lowering into a stable seated posture on a chair.</p>
                     </article>
                     <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/sit_chair.jpg" aria-label="Humanoid sitting on a chair"><source data-src="humanoid_skills/sit_chair.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Sit on Chair</span>Approaching a chair and lowering the body into a stable seated posture, settling its weight onto the seat.</p>
+                        <video class="lazy-media" loop muted playsinline poster="g1_skills/carry_box.jpg" aria-label="Unitree G1 carry box"><source data-src="g1_skills/carry_box.mp4" type="video/mp4"></video>
+                        <p><span class="c-title">Carry Box</span>Squatting to grasp a box, lifting it, carrying it, and setting it down.</p>
                     </article>
                     <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/carry_box.jpg" aria-label="Humanoid carrying a box"><source data-src="humanoid_skills/carry_box.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Carry Box</span>Picking up a box, holding it against the torso, and walking forward while keeping the load balanced.</p>
-                    </article>
-                    <article class="carousel-card">
-                        <video class="lazy-media" loop muted playsinline poster="humanoid_skills/crawl.jpg" aria-label="Humanoid crawling"><source data-src="humanoid_skills/crawl.mp4" type="video/mp4"></video>
-                        <p><span class="c-title">Crawl</span>Moving forward on hands and knees, staying low to the ground with a coordinated four-point crawling gait.</p>
+                        <video class="lazy-media" loop muted playsinline poster="g1_skills/crawl.jpg" aria-label="Unitree G1 crawl"><source data-src="g1_skills/crawl.mp4" type="video/mp4"></video>
+                        <p><span class="c-title">Crawl</span>Moving forward on hands and knees with a low, coordinated crawling gait.</p>
                     </article>
                 </div>
             </div>
